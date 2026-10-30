@@ -20,11 +20,12 @@ portfolio/
     │   └── cv.ts           # CV Data: ALL portfolio text, typed (§2)
     ├── app/
     │   ├── layout.tsx      # Fonts, metadata, Nav
-    │   ├── page.tsx        # Picks FullPage or CompactPage from the mode
+    │   ├── page.tsx        # Renders <Page />
     │   ├── cv/page.tsx     # CV Page, print CSS
     │   └── globals.css     # Tokens from DESIGN.md §2, base styles
     ├── components/
     │   ├── Nav.tsx
+    │   ├── Page.tsx        # Picks FullPage (next/dynamic, ssr: false) or CompactPage from useMode()
     │   ├── mode.tsx        # useMode() / setMode(): Full / Compact via useSyncExternalStore, localStorage, reduced-motion
     │   ├── full/
     │   │   ├── FullPage.tsx    # Lenis + ScrollTrigger setup, section order

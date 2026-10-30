@@ -6,8 +6,10 @@ import { cv, type Entry, type Link, type Project } from "@/data/cv";
 export function Section({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
   return (
     <section id={id} className="scroll-mt-20 pt-24 sm:pt-40">
-      <h2 className="font-display text-[32px] leading-tight sm:text-5xl">{title}</h2>
-      <div className="mt-8 sm:mt-12">{children}</div>
+      <h2 data-reveal className="font-display text-[32px] leading-tight sm:text-5xl">{title}</h2>
+      <div data-reveal className="mt-8 sm:mt-12">
+        {children}
+      </div>
     </section>
   );
 }
@@ -70,6 +72,16 @@ export function ProjectList({ projects }: { projects: Project[] }) {
         </Row>
       ))}
     </ul>
+  );
+}
+
+// Name + Headline. Full Mode replaces this with the Bust Hero in Block 4.
+export function Intro() {
+  return (
+    <header className="flex min-h-[70svh] flex-col justify-end pb-8">
+      <h1 className="font-display text-[clamp(64px,14vw,200px)] leading-[0.95] tracking-[-0.02em]">{cv.name}</h1>
+      <p className="mt-6 max-w-[640px] text-lg text-stone">{cv.headline}</p>
+    </header>
   );
 }
 

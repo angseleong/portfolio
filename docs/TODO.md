@@ -22,7 +22,7 @@
 
 **Checkpoint:** `npm run dev` shows a black page with the owner's name in Instrument Serif. ✅ Verified 30 Oct at desktop and 375×812, no console errors, `npm run build` + `npm run lint` clean. The Vercel preview URL works: waiting on the owner's import.
 
-## ACTIVE — Block 1: MVP — Compact Mode
+## DONE — Block 1: MVP — Compact Mode
 
 - [x] `CompactPage` with every section from PRD FR-11, all text from `cv.ts`.
 - [x] Shared list rows in `lists.tsx` (More Projects, Research, Recognition, Volunteering, Education, Contact).
@@ -31,15 +31,15 @@
 
 **Checkpoint:** At desktop size and 375×812, every piece of content in `DATA.md` is readable, every link works, and nothing scrolls sideways. ✅ Verified 30 Oct: all sections render, 11 external links + mailto, no horizontal scroll at 375 px, toggle saves to `localStorage`, reduced motion picks Compact (checked by stubbing `matchMedia`), lint + build clean. Until Block 2 both modes render CompactPage.
 
+## DONE — Block 2: Full Mode — Sections
+- [x] `lib/scroll.ts` (GSAP 3.15 + ScrollTrigger + Lenis 1.3) and `FullPage`, loaded with `next/dynamic` (`ssr: false`) from `components/Page.tsx`.
+- [x] `Story`: four lines, one per screen, word-by-word Develop scrubbed on scroll.
+- [x] `Stack`: three Lanes, CSS Marquee (32/38/34 s, middle Lane reversed), hover pause + white, Simple Icons 16.36 SVGs in `public/icons/` drawn with CSS masks. Nmap has no Simple Icons logo, so it shows its label only.
+- [x] Section entrance motion (DESIGN.md §8) via `[data-reveal]` + `ScrollTrigger.batch`. Reduced motion → Compact Mode.
+
+**Checkpoint:** Scroll from top to bottom in Full Mode: Story develops, Lanes move and pause on hover. Reduced motion lands in Compact Mode. ✅ Verified 30 Oct at desktop and 375×812: Lenis active, Story develops, Lanes move and pause on hover, switching to Compact removes Lenis and the Marquee and switching back restores them, no horizontal scroll, lint + build clean.
+
 ---
-
-## Block 2: Full Mode — Sections
-- [ ] `lib/scroll.ts` (GSAP + ScrollTrigger + Lenis) and `FullPage`, loaded with `next/dynamic`.
-- [ ] `Story`: four lines, word-by-word Develop on scroll.
-- [ ] `Stack`: three Lanes, CSS Marquee, opposite directions, hover pause + white, icons in `public/icons/`.
-- [ ] Section entrance motion (DESIGN.md §8). Reduced motion → Compact Mode.
-
-**Checkpoint:** Scroll from top to bottom in Full Mode: Story develops, Lanes move and pause on hover. Reduced motion lands in Compact Mode.
 
 ## Block 3: Darkroom
 - [ ] Line, Clips, three Prints from `projects` with `print`.
