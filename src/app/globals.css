@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* Tokens: docs/DESIGN.md §2. Dark only. */
+:root {
+  --ink: #0b0b0b;
+  --ink-2: #141414;
+  --line: #262626;
+  --marble: #e9e4da;
+  --stone: #a8a39a;
+  --dust: #6e6a63;
+  --amber: #e8a33d;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-line: var(--line);
+  --color-marble: var(--marble);
+  --color-stone: var(--stone);
+  --color-dust: var(--dust);
+  --color-amber: var(--amber);
+  --font-display: var(--font-instrument-serif);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--ink);
+  color: var(--marble);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}

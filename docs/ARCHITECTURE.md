@@ -74,6 +74,7 @@ export const cv: {
   email: string; location: string; links: Link[];
   story: string[];          // the four Story lines (web)
   summary: string;          // the short CV summary
+  closing: string;          // the Contact closing line
   stack: { lane: string; items: { name: string; icon?: string }[] }[];
   projects: Project[];      // Main Projects first, in display order
   research: Entry[];

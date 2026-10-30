@@ -9,18 +9,18 @@
 ## ACTIVE — Block 0: Setup
 
 **Owner does (by hand):**
-- [ ] Confirm the old Apple-style code in this folder (`app/`, `components/`, `lib/`, configs) can be deleted. It is not in any git repo, so deleting it is final.
+- [x] Confirm the old Apple-style code in this folder can be deleted. Deleted 30 Oct 2026.
+- [ ] Import `angseleong/portfolio` on vercel.com (Add New → Project, framework preset Next.js, no env vars). The agent can't log in for you.
 - [ ] Take plain screenshots of OSKM, RONDA and lafaz → `public/prints/`.
 - [ ] Confirm the two **⚠ confirm** items in `docs/DATA.md`.
 
 **Agent does:**
 - [x] Write the docs (this folder), `git init`, push to `angseleong/portfolio` (public).
-- [ ] Delete the old code (after the owner confirms), scaffold Next.js (App Router) + TypeScript strict + Tailwind at the repo root.
-- [ ] Add tokens from `DESIGN.md` §2 to `globals.css`; load Instrument Serif, Geist, Geist Mono with `next/font/google`.
-- [ ] Write `src/data/cv.ts` with the types from `ARCHITECTURE.md` §2 and every value from `DATA.md`.
-- [ ] Connect the repo to Vercel.
+- [x] Delete the old code, scaffold Next.js 16 (App Router) + TypeScript strict + Tailwind 4 at the repo root.
+- [x] Add tokens from `DESIGN.md` §2 to `globals.css`; load Instrument Serif, Geist, Geist Mono with `next/font/google`.
+- [x] Write `src/data/cv.ts` with the types from `ARCHITECTURE.md` §2 and every value from `DATA.md` (plus `closing`). The two ⚠ items are marked in comments.
 
-**Checkpoint:** `npm run dev` shows a black page with the owner's name in Instrument Serif. The Vercel preview URL works.
+**Checkpoint:** `npm run dev` shows a black page with the owner's name in Instrument Serif. ✅ Verified 30 Oct at desktop and 375×812, no console errors, `npm run build` + `npm run lint` clean. The Vercel preview URL works: waiting on the owner's import.
 
 ## ACTIVE — Block 1: MVP — Compact Mode
 
