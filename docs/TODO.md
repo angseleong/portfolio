@@ -24,19 +24,19 @@
 
 ## ACTIVE — Block 1: MVP — Compact Mode
 
-- [ ] `CompactPage` with every section from PRD FR-11, all text from `cv.ts`.
-- [ ] Shared list rows in `lists.tsx` (More Projects, Research, Recognition, Volunteering, Education, Contact).
-- [ ] `Nav` with anchors, CV button (links to `/cv.pdf`, may 404 until Block 5), Full / Compact toggle (`mode.tsx`, ARCHITECTURE.md §3).
-- [ ] Phone layout at 375 px, 16 px gutter.
+- [x] `CompactPage` with every section from PRD FR-11, all text from `cv.ts`.
+- [x] Shared list rows in `lists.tsx` (More Projects, Research, Recognition, Volunteering, Education, Contact).
+- [x] `Nav` with anchors, CV button (links to `/cv.pdf`, 404 until Block 5), Full / Compact toggle (`mode.tsx`, ARCHITECTURE.md §3). Phones show name, CV and the toggle only; the section links are hidden under 640 px.
+- [x] Phone layout at 375 px, 16 px gutter.
 
-**Checkpoint:** At desktop size and 375×812, every piece of content in `DATA.md` is readable, every link works, and nothing scrolls sideways.
+**Checkpoint:** At desktop size and 375×812, every piece of content in `DATA.md` is readable, every link works, and nothing scrolls sideways. ✅ Verified 30 Oct: all sections render, 11 external links + mailto, no horizontal scroll at 375 px, toggle saves to `localStorage`, reduced motion picks Compact (checked by stubbing `matchMedia`), lint + build clean. Until Block 2 both modes render CompactPage.
 
 ---
 
 ## Block 2: Full Mode — Sections
 - [ ] `lib/scroll.ts` (GSAP + ScrollTrigger + Lenis) and `FullPage`, loaded with `next/dynamic`.
 - [ ] `Story`: four lines, word-by-word Develop on scroll.
-- [ ] `Stack`: three Lanes, CSS Marquee, opposite directions, hover pause + amber, icons in `public/icons/`.
+- [ ] `Stack`: three Lanes, CSS Marquee, opposite directions, hover pause + white, icons in `public/icons/`.
 - [ ] Section entrance motion (DESIGN.md §8). Reduced motion → Compact Mode.
 
 **Checkpoint:** Scroll from top to bottom in Full Mode: Story develops, Lanes move and pause on hover. Reduced motion lands in Compact Mode.
@@ -46,7 +46,7 @@
 - [ ] Sway (CSS), Wind (pointer, desktop), Develop (IntersectionObserver).
 - [ ] Flip to the Back, one at a time, keyboard + Esc.
 - [ ] Desktop pin with horizontal scroll; phone swipe with snap.
-- [ ] Amber safelight and darker section background.
+- [ ] Enlarger light (soft white glow from the top) and darker section background.
 
 **Checkpoint:** On desktop the Line slides with scroll and every Print flips. On a phone the Line swipes and snaps, and every Print flips with a tap.
 

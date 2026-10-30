@@ -40,7 +40,8 @@ export type CV = {
   stack: StackLane[];
   projects: Project[];
   research: Entry[];
-  recognition: Entry[];
+  /** One section, grouped (Competitions, Certifications). */
+  recognition: { label: string; entries: Entry[] }[];
   volunteering: Entry[];
   education: Entry[];
 };
@@ -207,20 +208,30 @@ export const cv: CV = {
   ],
 
   recognition: [
-    { title: "Finalist, geothermal case study competition", org: "Vortex ITB 2026", period: "2026" },
-    { title: "Top 30, Human-Centric Security track", org: "HackNusa 2026", period: "2026" },
     {
-      title: "Cyber Security Analyst",
-      org: "CyberWarFare Labs",
-      period: "Oct 2026",
-      links: [
-        {
-          label: "Credential",
-          href: "https://labs.cyberwarfare.live/credential/achievement/6ae165557bd2ad9065482598",
-        },
+      label: "Competitions",
+      entries: [
+        { title: "Finalist, geothermal case study competition", org: "Vortex ITB 2026", period: "2026" },
+        { title: "Top 30, Human-Centric Security track", org: "HackNusa 2026", period: "2026" },
       ],
     },
-    { title: "Introduction to Cybersecurity", org: "Cisco", period: "May 2026" },
+    {
+      label: "Certifications",
+      entries: [
+        {
+          title: "Cyber Security Analyst",
+          org: "CyberWarFare Labs",
+          period: "Oct 2026",
+          links: [
+            {
+              label: "Credential",
+              href: "https://labs.cyberwarfare.live/credential/achievement/6ae165557bd2ad9065482598",
+            },
+          ],
+        },
+        { title: "Introduction to Cybersecurity", org: "Cisco", period: "May 2026" },
+      ],
+    },
   ],
 
   volunteering: [

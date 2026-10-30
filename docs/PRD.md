@@ -51,22 +51,22 @@ The owner is an Informatics student at ITB targeting **security, software engine
 
 ### FR-4 — Stack
 - Three Lanes (Languages, Frameworks, Security & Tools), 6 items each, in a Marquee. Neighbouring Lanes run in opposite directions.
-- Each item: monochrome logo + label. Hover: the Lane pauses, the item's logo turns amber.
+- Each item: monochrome logo + label. Hover: the Lane pauses, the item's logo and label turn white.
 - No skill levels, bars or percentages.
 
 ### FR-5 — Darkroom (Projects)
-- The three Main Projects hang as Prints on one Line under an amber light.
+- The three Main Projects hang as Prints on one Line under the white light of an enlarger.
 - Prints Sway out of phase. The cursor passing near a Print gives it Wind.
 - Each Print Develops the first time it enters the screen (~1 s), then stays a plain screenshot.
 - Tap or click Flips a Print to its Back: title, role, summary, tech, links. Tapping again flips it back. Only one Print is flipped at a time.
 - Desktop: the Darkroom is pinned and vertical scroll slides the Line sideways. Phone: the Line is a horizontal swipe with snap, not pinned.
-- **More Projects** follows as a plain list: title, one line, tech, link.
+- **More Projects** follows as one collapsed row ("More projects" + count) that continues the list above it. Tapping it opens the plain list: title, one line, tech, link. Closed by default, in both modes.
 
 ### FR-6 — Research
 - A list: title, venue and date, one-line summary, links (paper, code, demo).
 
 ### FR-7 — Recognition
-- One list for competitions and certifications: name, issuer, date, credential link if any.
+- One section with two groups, **Competitions** and **Certifications**, each a list: name, issuer, date, credential link if any.
 
 ### FR-8 — Volunteering
 - A list: organization, role, period, one line.
@@ -78,7 +78,7 @@ The owner is an Informatics student at ITB targeting **security, software engine
 - A large closing line, then email (mailto), LinkedIn, GitHub, and **Download CV**.
 
 ### FR-11 — Compact Mode
-- Every section above in one centered column in this order: name + Headline → Story (as one paragraph) → Stack (as three wrapped lists) → Projects (Main Projects first, then More Projects) → Research → Recognition → Volunteering → Education → Contact.
+- Every section above in one centered column in this order: name + Headline → About (the short Summary, not the Story) → Stack (as three wrapped lists) → Projects (Main Projects first, then More Projects) → Research → Recognition → Volunteering → Education → Contact.
 - No 3D, no GSAP, no Lenis are loaded in Compact Mode.
 
 ### FR-12 — CV Page and PDF

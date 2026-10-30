@@ -1,7 +1,7 @@
 # Portfolio - Core Project Rules
 
 **You are working on the owner's personal portfolio: a dark, quiet one-page site.**
-It opens on a marble Bust of the owner that turns as you scroll. Projects hang as Prints on a Line in an amber-lit Darkroom. A Compact Mode shows the same content as a plain page with no motion.
+It opens on a marble Bust of the owner that turns as you scroll. Projects hang as Prints on a Line in a Darkroom lit by an enlarger. A Compact Mode shows the same content as a plain page with no motion.
 **Follow these rules for the whole project.**
 
 ## Context Documents

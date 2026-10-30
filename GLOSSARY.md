@@ -45,7 +45,7 @@ The endless sideways scroll of a Lane. Pauses on hover.
 _Avoid_: Ticker, carousel, slider
 
 **Darkroom**:
-The Projects section: an amber-lit room where the Main Projects hang as Prints on a Line. Pinned while the Line slides sideways.
+The Projects section: a dark room lit from above by an enlarger's white light, where the Main Projects hang as Prints on a Line. Pinned while the Line slides sideways.
 _Avoid_: Red room, gallery, projects carousel
 
 **Line**:
@@ -81,7 +81,7 @@ A project that hangs as a Print: OSKM ITB 2026 Website, RONDA, lafaz.
 _Avoid_: Featured project, hero project
 
 **More Projects**:
-The plain list below the Darkroom with every other project.
+The collapsed row below the Main Projects that opens a plain list of every other project.
 _Avoid_: Side projects, other work, archive
 
 **Research**:
@@ -89,7 +89,7 @@ Written papers: the bedrock coordinates paper and the rooftop solar plan.
 _Avoid_: Publications, papers, writing
 
 **Recognition**:
-Competitions and certifications in one list.
+Competitions and certifications in one section, as two groups.
 _Avoid_: Awards, achievements, certificates
 
 **Volunteering**:

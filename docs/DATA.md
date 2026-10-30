@@ -27,9 +27,9 @@ Built only from the owner's own answers (why security, what keeps them building,
 3. I don't stay up for the code. I stay up because what I ship might help a lot of people.
 4. When I'm not building, I'm telling stories, or learning something new.
 
-**Compact Mode** joins the four lines into one paragraph.
+The Story is Full Mode only. **Compact Mode** shows the Summary (§3) as its About instead.
 
-## 3. Summary (CV only)
+## 3. Summary (CV + Compact Mode About)
 
 > Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation website.
 
@@ -90,6 +90,8 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
    - CV: no (web only)
 
 ## 8. Recognition
+
+One section, two groups: **Competitions** (Vortex, HackNusa) and **Certifications** (CyberWarFare Labs, Cisco).
 
 | Title | Issuer | Date | Link | CV |
 |---|---|---|---|---|

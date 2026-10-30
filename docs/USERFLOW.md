@@ -10,10 +10,11 @@
 |---|---|
 | Hero (~2 screens) | The Bust turns from front to back, the camera moves in, the name fades. |
 | Story (4 screens) | Each line Develops word by word as it reaches the middle. |
-| Stack | Three Lanes slide sideways. Hovering pauses a Lane and lights the item amber. |
+| Stack | Three Lanes slide sideways. Hovering pauses a Lane and lights the item white. |
 | Darkroom (desktop) | The page holds still; scrolling slides the Line so each Print passes by. Prints Sway; the cursor gives them Wind; each Print Develops once. |
 | Darkroom (phone) | Swipe the Line sideways; it snaps to each Print. |
-| More Projects → Research → Recognition → Volunteering → Education | Plain lists. Links open in a new tab. |
+| More Projects | One collapsed row under the Main Projects. Tap to open the list, tap again to close. |
+| Research → Recognition → Volunteering → Education | Plain lists. Links open in a new tab. |
 | Contact | Closing line, email, LinkedIn, GitHub, Download CV. |
 
 ## 3. Reading a Main Project

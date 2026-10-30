@@ -19,13 +19,13 @@ portfolio/
     ├── data/
     │   └── cv.ts           # CV Data: ALL portfolio text, typed (§2)
     ├── app/
-    │   ├── layout.tsx      # Fonts, metadata, <Mode> provider, Nav
+    │   ├── layout.tsx      # Fonts, metadata, Nav
     │   ├── page.tsx        # Picks FullPage or CompactPage from the mode
     │   ├── cv/page.tsx     # CV Page, print CSS
     │   └── globals.css     # Tokens from DESIGN.md §2, base styles
     ├── components/
     │   ├── Nav.tsx
-    │   ├── mode.tsx        # Mode context: Full / Compact, localStorage, reduced-motion
+    │   ├── mode.tsx        # useMode() / setMode(): Full / Compact via useSyncExternalStore, localStorage, reduced-motion
     │   ├── full/
     │   │   ├── FullPage.tsx    # Lenis + ScrollTrigger setup, section order
     │   │   ├── Hero.tsx        # Pin + scroll progress → BustScene
@@ -78,7 +78,7 @@ export const cv: {
   stack: { lane: string; items: { name: string; icon?: string }[] }[];
   projects: Project[];      // Main Projects first, in display order
   research: Entry[];
-  recognition: Entry[];
+  recognition: { label: string; entries: Entry[] }[];  // Competitions, Certifications
   volunteering: Entry[];
   education: Entry[];
 } = { /* ... */ };

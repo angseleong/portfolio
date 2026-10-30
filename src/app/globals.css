@@ -8,7 +8,7 @@
   --marble: #e9e4da;
   --stone: #a8a39a;
   --dust: #6e6a63;
-  --amber: #e8a33d;
+  --light: #ffffff;
 }
 
 @theme inline {
@@ -18,7 +18,7 @@
   --color-marble: var(--marble);
   --color-stone: var(--stone);
   --color-dust: var(--dust);
-  --color-amber: var(--amber);
+  --color-light: var(--light);
   --font-display: var(--font-instrument-serif);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -26,6 +26,18 @@
 
 html {
   color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+:focus-visible {
+  outline: 1px solid var(--light);
+  outline-offset: 3px;
 }
 
 body {
