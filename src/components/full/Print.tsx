@@ -62,6 +62,8 @@ export function Print({
                   <img
                     src={project.print}
                     alt={`${project.title} preview`}
+                    loading="lazy"
+                    decoding="async"
                     draggable={false}
                     onLoad={(e) => {
                       // Long Reels pan slower: about 1.2 s per 16:10 frame of image.

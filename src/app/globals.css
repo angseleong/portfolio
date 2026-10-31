@@ -30,6 +30,16 @@
     }
   }
 
+  --animate-rise: rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  /* The Hero name's letters, once on load (DESIGN.md §8). */
+  @keyframes rise {
+    from {
+      translate: 0 40%;
+      opacity: 0;
+    }
+  }
+
   --animate-sway: sway 4.2s ease-in-out infinite alternate;
 
   @keyframes sway {
@@ -40,6 +50,18 @@
       rotate: 3deg;
     }
   }
+}
+
+/* ADR-0012: before hydration the HTML holds both first screens; the layout's script sets data-mode. */
+html:not([data-mode="full"]) [data-first="full"],
+html[data-mode="full"] [data-first="compact"] {
+  display: none;
+}
+
+/* While Lenis scrolls, the Line slides under a still cursor: without this, every Print it passes starts its Reel pan
+   and snaps back. Hover comes back as soon as the scroll stops. */
+html.lenis-scrolling [data-print] {
+  pointer-events: none;
 }
 
 /* Darkroom Print: Develop once (DESIGN.md §6). */
@@ -70,9 +92,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Lenis does its own smoothing in Full Mode. */
+/* Lenis does its own smoothing in Full Mode. Scroll anchoring off: when More Projects opens, the browser kept the
+   content below in place by scrolling ~500 px, so the room shot up (owner saw the page "drop", 31 Oct). */
 html.lenis {
   scroll-behavior: auto;
+  overflow-anchor: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

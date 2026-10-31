@@ -29,11 +29,11 @@ portfolio/
     │   └── globals.css     # Tokens from DESIGN.md §2, base styles
     ├── components/
     │   ├── Nav.tsx
-    │   ├── Page.tsx        # Picks FullPage (next/dynamic, ssr: false) or CompactPage from useMode()
+    │   ├── Page.tsx        # Hero + FullPage (next/dynamic, ssr: false), or CompactPage, from useMode()
     │   ├── mode.tsx        # useMode() / setMode(): Full / Compact via useSyncExternalStore, localStorage, reduced-motion
     │   ├── full/
     │   │   ├── FullPage.tsx    # Lenis + ScrollTrigger setup, section order
-    │   │   ├── Hero.tsx        # Pin + scroll progress → BustScene
+    │   │   ├── Hero.tsx        # In the server HTML (ADR-0012); pin + scroll progress → BustScene
     │   │   ├── BustScene.tsx   # R3F <Canvas>, lights, GLB, useFrame reads progress
     │   │   ├── Story.tsx
     │   │   ├── Stack.tsx       # Three Lanes, CSS Marquee
@@ -45,7 +45,7 @@ portfolio/
         └── scroll.ts       # Registers GSAP + ScrollTrigger once, bridges Lenis
 ```
 
-Full Mode code (`components/full/`, `three`, `gsap`, `lenis`) is loaded with `next/dynamic` so Compact Mode and `/cv` never download it.
+Full Mode code (`components/full/`, `three`, `gsap`, `lenis`) is loaded with `next/dynamic` so Compact Mode and `/cv` never download it. `BustScene` (three, R3F, drei) is a second `next/dynamic` chunk that the Hero starts one frame after it paints, so the 3D code never delays the first screen (Block 6, Lighthouse).
 
 ## 2. CV Data (`src/data/cv.ts`)
 
@@ -102,25 +102,32 @@ Rules:
 2. Else if `prefers-reduced-motion: reduce`, use `compact`.
 3. Else `full`.
 
-The first server render is Compact Mode, so there is no flash of 3D for reduced-motion visitors and the page has real content before JS loads. Full Mode mounts after hydration.
+The server HTML holds both first screens, the Hero and Compact Mode (ADR-0012). An inline script in the layout's `<head>` runs the same three rules and sets `<html data-mode>` before the first paint; CSS hides the `[data-first]` screen that doesn't match. With JS off, Compact Mode shows. `useMode()` is `null` on the server and in the first client render, then the real mode: the Hero stays in place for Full Mode (no remount) and the rest of Full Mode loads with `next/dynamic`.
 
 ## 4. Scroll Wiring
 
 `lib/scroll.ts` registers `ScrollTrigger` once and drives it from Lenis (`lenis.on('scroll', ScrollTrigger.update)`, Lenis ticked by `gsap.ticker`).
 
 ### 4.1 Hero
-- One ScrollTrigger: `pin: true`, `end: "+=200%"` (phone `+=120%`), `scrub: true`.
+- The Hero is a wrapper of `300svh` (phone `220svh`) with a CSS `sticky` section inside, not a GSAP pin: sticky is held by the browser, so the Hero doesn't jump while three.js is starting on a phone. One ScrollTrigger on the wrapper (`top top` → `bottom bottom`, `scrub: true`) drives the timeline.
+- The Bust loads in two steps after the Hero paints: `import()` of the three.js chunk, then the canvas mounts on `requestIdleCallback`. Phones render at DPR ≤ 1.5 with a 128 px environment map.
 - Its progress (0–1) is written to a ref. `BustScene`'s `useFrame` reads the ref each frame and sets `bust.rotation.y = progress * Math.PI + spin` (spin grows by 0.25 rad/s, the idle turn) and `camera.position.z = 2.95 - progress * 0.75`. No React state per frame.
-- The name's opacity is a GSAP tween on the same trigger.
+- The name coming forward (the dim copy out, the front copy in) is part of the same timeline.
+
+### 4.1b Closing
+- `Closing.tsx` mounts a second `BustScene` with `peek` once the section is within half a screen (`IntersectionObserver`). Same GLB (cached by `useGLTF`), the whole Bust with its plinth, a level camera at y −0.02, z 3.9 (a `rotation` stops R3F's default `lookAt(0,0,0)`; the margin keeps the plinth in frame at full tilt), a `PeekRig` that turns the Bust on its plinth toward the pointer, measured from the canvas's own centre: full turn (yaw ±0.9 rad, pitch ±0.16 rad) at about a third of the screen away.
+- Every `BustScene` sets `frameloop="never"` while its canvas is off screen, so the Hero stops drawing while the reader is further down.
 
 ### 4.2 Darkroom
-- Desktop (≥ 768 px): ScrollTrigger `pin: true`, `scrub: true`, tweening the Line's `x` from 0 to `-(lineWidth - viewportWidth)`. `end` = that distance, so one pixel of scroll moves the Line one pixel.
+- Desktop (≥ 768 px): the room is CSS `sticky` (top 0) over a runway `<div>` whose height is the Line's travel (`-(lineWidth - viewportWidth)`, reset in `onRefreshInit`). One ScrollTrigger on the wrapper, `scrub: true`, tweens the Line's `x` over that runway, so one pixel of scroll moves the Line one pixel. Not a GSAP pin: refreshing a pin takes the pinned element out of the DOM and back, which restarted every Print's CSS sway (owner, 31 Oct). There is no GSAP pin anywhere on the page now.
 - Phone: no pin. The Line is `overflow-x: auto` with `scroll-snap-type: x mandatory`.
 - **Sway** is a CSS keyframe on the Print. **Wind** adds a second rotation on a wrapper element, so the two never fight: a `pointermove` handler on the Darkroom finds Prints within 200 px and sets a CSS variable `--wind` that eases back to 0.
 - **Develop**: an `IntersectionObserver` adds `.developed` once; CSS does the rest.
 - **Line**: an SVG `<path>` redrawn on `gsap.ticker` through the top-center of every `[data-drag]` wrapper, with a quadratic sag between points.
 - **Drag**: `Draggable` (from the `gsap` package) on each `[data-drag]`, fine pointers only, `dragClickables: true`; release tweens back to 0,0. Draggable swallows the click that ends a drag, so a plain click still Opens.
 - **Reel pan**: CSS only. The window is a size container (`container-type: size`); the image translates to `calc(-100% + 100cqh)` on hover or `[data-open]`. Its duration comes from a `--pan` variable set on image load from its aspect ratio.
+- **More Projects**: a button and a `grid-template-rows: 0fr → 1fr` panel (700 ms, `inert` while closed) right under the Line, inside the sticky room. When the height transition ends it calls `onSettled` → `ScrollTrigger.refresh()`, which is safe with no pin. `html.lenis { overflow-anchor: none }`: with scroll anchoring on, the browser scrolled ~500 px to keep the content below still, and the room shot up.
+- **Hover while scrolling**: `html.lenis-scrolling [data-print] { pointer-events: none }`, so the Line sliding under a still cursor doesn't start and snap back each Reel pan. Print images use `decoding="async"`.
 - **Open**: one open index in `Darkroom`; the notes use a `grid-template-rows: 0fr → 1fr` transition. Esc closes. The section is laid out from the top (not centered) so an opening Print grows downward without moving the Line.
 
 ## 5. Bust Pipeline (see ADR-0006)
@@ -130,8 +137,9 @@ The first server render is Compact Mode, so there is no flash of 3D for reduced-
 3. `/Applications/Blender.app/Contents/MacOS/Blender -b -P scripts/bust/finish.py -- scripts/bust/src/raw.glb scripts/bust/src/template/marble_bust_01_1k.gltf public/models`
    (`scripts/bust/src/` is git-ignored: the owner's scan and the downloaded template):
    - keep only the scan's head (cut under the chin, cap the opening);
+   - the scan's two ears differ and its -X ear came out as a ring, so the +X ear is mirrored across the face's midline onto the -X side, and both are thickened a little so the coarse remesh keeps them solid (owner's call, 31 Oct);
    - the neck, shoulders, chest and plinth come from Poly Haven's Marble Bust 01 (CC0, Rico Cilliers): turned so the chest faces front and its head cut off. The scan's head is scaled to the template's head height, set on the neck and turned 35° the way the neck was carved; the top of the neck is widened to the outline of the head's cut so hair runs into neck;
-   - mosaic (owner's call): fuse both with a coarse voxel remesh (0.02, which also hides the joint and turns the scan's hair sheets into solid locks), then decimate to flat facets: ~6k tris (`bust.glb`) and ~3k (`bust-lite.glb`). A fine remesh or skin smoothing ruined the hair and eyes, so neither is done;
+   - mosaic (owner's call): fuse both with a coarse voxel remesh (0.02, which turns the scan's hair sheets into solid locks; done with the face squared to the grid so both sides come out alike), smooth only a band around the head/neck joint so no ring shows (owner's call, 31 Oct), then decimate to flat facets: ~6k tris (`bust.glb`) and ~3k (`bust-lite.glb`). A fine remesh or skin smoothing ruined the hair and eyes, so neither is done;
    - strip textures; the metal material from DESIGN.md §5 is set in R3F, not in the file;
    - export glTF with Draco compression; `scripts/bust/src/preview.blend` keeps the Bust for looking at in Blender.
    - `public/draco/` holds the Draco decoder (copied from `three`) so no CDN is used.

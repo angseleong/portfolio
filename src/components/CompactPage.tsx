@@ -2,9 +2,9 @@ import { cv } from "@/data/cv";
 import { Contact, EntryList, Intro, MoreProjects, ProjectList, Recognition, Section, mainProjects } from "./lists";
 
 // PRD FR-11: every section in one plain column, no motion.
-export function CompactPage() {
+export function CompactPage({ first }: { first?: boolean }) {
   return (
-    <main id="top" className="mx-auto w-full max-w-[1080px] px-4 pb-32 pt-14 sm:px-8">
+    <div data-first={first ? "compact" : undefined} className="mx-auto w-full max-w-[1080px] px-4 pb-24 pt-14 sm:px-8">
       <Intro />
 
       <Section title="About">
@@ -48,6 +48,6 @@ export function CompactPage() {
       </Section>
 
       <Contact />
-    </main>
+    </div>
   );
 }

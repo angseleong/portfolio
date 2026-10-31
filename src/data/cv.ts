@@ -45,6 +45,7 @@ export type CV = {
   };
   summary: string;
   closing: string;
+  closingLines: string[]; // Full Mode closing screen, under the closing line
   stack: StackLane[];
   projects: Project[];
   research: Entry[];
@@ -71,7 +72,7 @@ export const cv: CV = {
     epigraph: { text: "Nature loves to hide.", by: "Heraclitus" },
     statement: "Every leap forward leaves something exposed. I want to be the one who finds it first.",
     lines: [
-      "I once found a hidden Minecraft base from a single screenshot of bedrock. Systems are like that: they always show more than they mean to.",
+      "Once, a single screenshot of bedrock gave away a hidden Minecraft base. What hides still leaves a trace. I read traces.",
       "I don't stay up for the code. I stay up because what I ship might reach a lot of people. The rest of the time, I'm out talking with them.",
     ],
     photos: [
@@ -84,6 +85,11 @@ export const cv: CV = {
   summary:
     "Second-year Informatics student at Institut Teknologi Bandung (GPA 3.90/4.00) focused on security and web engineering. I want to become an ethical technologist who builds systems that work, stay secure and can be trusted, while I keep learning and give back to the communities I work with. I bring care and attention to detail to every project, from web apps to security tools. My strength is adapting across technical domains; my growth area is depth, which I work on by setting focused learning goals in cybersecurity.",
   closing: "Let's build something safe.",
+  // Drafted 31 Oct from the Story's own lines; ⚠ confirm with the owner.
+  closingLines: [
+    "I build for the web, and then I look for where it breaks.",
+    "If something you run has to hold, or you would rather find its weak spot before someone else does, write to me.",
+  ],
 
   stack: [
     {
@@ -236,6 +242,8 @@ export const cv: CV = {
       period: "2024–2025",
       summary:
         "Designed an on-grid rooftop solar plant in Helioscope (792 panels) that covers 37% of the factory's daily use and cuts its yearly bill by 26%, and checked it with power-flow, short-circuit and economic analysis.",
+      // The appendix page with PT KBI's real electricity bill is left out of the public copy (owner, 31 Oct).
+      links: [{ label: "Paper (PDF, Indonesian)", href: "/research/plts-pt-kbi.pdf" }],
       cv: false,
     },
   ],

@@ -30,7 +30,7 @@ Rules: no hues at all, only warm greys and white. White is a state (hover, activ
 
 | Role | Size (desktop / phone) |
 |---|---|
-| Hero name | `clamp(56px, 15vw, 240px)`, tracking −0.02em, one line, behind the Bust |
+| Hero name | `clamp(56px, 15vw, 240px)`, tracking −0.02em, one line, behind the Bust, then in front |
 | Section title | 48 / 32 px |
 | Story statement | 40 / 26 px, Instrument Serif |
 | Body | 17 / 16 px, line-height 1.6 |
@@ -39,9 +39,9 @@ Rules: no hues at all, only warm greys and white. White is a state (hover, activ
 ## 4. Layout
 - Content column max 1080 px; text measure max 640 px.
 - Phone: full width with a 16 px gutter.
-- Sections are separated by space (160 px desktop, 96 px phone), not by boxes.
+- Full Mode sections are separated by space (160 px desktop, 96 px phone), not by boxes. Compact Mode is dense: a hairline and 48 px between sections, the title in a 180 px left column on laptops.
 - Lists (Research, Recognition, Volunteering, More Projects) are rows with a hairline between them: title left, date right, one line under. Hover: title turns to white Instrument Serif italic.
-- More Projects is a native `<details>`: its summary looks like one more list row (label + count + a "+" that turns into "×"), so the rows read as one continuous list.
+- More Projects is a row that opens smoothly (height and fade, 700 ms; instant with reduced motion) in both modes; in Full Mode it sits right under the Line inside the Darkroom and opens into two columns on laptops. The row looks like one more list row (label + count + a "+" that turns into "×").
 - No numbered labels ("01 / about") above section titles: the title is enough. Mono labels are only for sub-groups inside a section (More projects, Competitions, Certifications).
 
 ## 5. The Bust
@@ -49,8 +49,8 @@ Rules: no hues at all, only warm greys and white. White is a state (hover, activ
 - Light: metal only shows what it reflects, so the light is a generated environment (drei `Environment` + `Lightformer`, no HDR download): a warm key panel from top-left, a soft fill from the right, and two faint cool-white rim panels behind so the silhouette reads on black.
 - Background is the page black; no floor, no shadow plane.
 - Framing: a close crop. The Bust fills ~90% of the height, head near the top edge, chest cut by the bottom (camera z 2.95, Bust lowered 0.22). Tall phone screens back off so the whole Bust shows.
-- The name sits behind the Bust (the canvas is transparent), so the head covers part of it. Its letters rise in on load (stagger 40 ms, `expo.out`). The Headline is small mono at the bottom left.
-- Hero scroll (pinned ~200 vh desktop, ~120 vh phone): rotation Y +π, camera z 2.95 → 2.2, name letter-spacing → 0.1em and opacity 1 → 0. Scrubbed, eased with `power1.inOut`.
+- At load the name sits behind the Bust at 45% opacity (the canvas is transparent), so the head covers part of it. Its letters rise in on load (stagger 40 ms, `expo.out`; a CSS animation, so it starts from the HTML). The Headline is small mono at the bottom left.
+- Hero scroll (CSS sticky for ~200 vh desktop, ~120 vh phone): rotation Y +π, camera z 2.95 → 2.2. The name comes forward between 20% and 70%: the dim copy fades out while a white copy in front of the canvas (`mix-blend-mode: difference`, so it inverts over the metal) fades in. Both copies are the same letters in the same place (no scale), so they never show as a double. Scrubbed, eased with `power1.inOut`.
 - Load: the GLB and Draco decoder are preloaded as soon as the 3D chunk arrives, and the canvas fades in (1.2 s) once the Bust is ready, so it never pops in.
 - Idle turn: the Bust also turns slowly on its own (0.25 rad/s) and never stops, even after the Hero scrolls away.
 
@@ -76,6 +76,7 @@ Rules: no hues at all, only warm greys and white. White is a state (hover, activ
 - Slow and smooth: default 600–900 ms, `cubic-bezier(0.22, 1, 0.36, 1)`.
 - Section content appears with opacity 0 → 1 and translateY 8 px → 0, once.
 - Story: one screen, no pin. The statement's words scrub from 15% to 100% while the section crosses the screen. The four photos (2×2 contact sheet, right on desktop, above the text on phones, mono frame numbers) Develop once like a Print, 250 ms apart, then rest in black and white. Hover (or a tap on phones) shows a photo in colour. The files are colour; CSS does the grey.
+- Closing: the whole Bust, plinth included, beside the text (right, vertically centred, 30% wide on laptops; under the text on phones). It rises 0.3 units into place once, then turns on its plinth toward the pointer, measured from the Bust itself (yaw ±0.9 rad, pitch ±0.16 rad, quick ease); on phones it sways ±0.25 rad instead.
 - `prefers-reduced-motion: reduce` → Compact Mode (no animation at all).
 
 ## 9. Do / Don't

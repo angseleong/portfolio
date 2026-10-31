@@ -24,7 +24,7 @@ Rewritten with the owner, 31 Oct 2026 (built from their own answers and the Mine
 
 - Epigraph: "Nature loves to hide." — Heraclitus
 - Statement: Every leap forward leaves something exposed. I want to be the one who finds it first.
-- Line: I once found a hidden Minecraft base from a single screenshot of bedrock. Systems are like that: they always show more than they mean to.
+- Line: Once, a single screenshot of bedrock gave away a hidden Minecraft base. What hides still leaves a trace. I read traces. (Owner picked this more poetic version, 31 Oct.)
 - Line: I don't stay up for the code. I stay up because what I ship might reach a lot of people. The rest of the time, I'm out talking with them.
 - Photos (contact sheet, in order): talking a problem through with two friends over a laptop; holding an ITB Informatics student flag; thumbs up at the Faculty of Medicine sign; this portfolio's code on the owner's monitor. Files `public/about-1..4.jpg`.
 
@@ -101,7 +101,7 @@ On the CV only INTEL is listed; the rest are web only (`cv: false`).
 2. **Planning a 356 kWp Rooftop Solar Plant for PT Karunia Berca Indonesia**
    - Venue: High school final paper, SMA Labschool Kebayoran · 2024–2025
    - Summary: Designed an on-grid rooftop solar plant in Helioscope (792 panels) that covers 37% of the factory's daily use and cuts its yearly bill by 26%, and checked it with power-flow, short-circuit and economic analysis.
-   - Links: none
+   - Links: Paper (PDF, Indonesian) `/research/plts-pt-kbi.pdf` — 98 pages, compressed to 3 MB; the appendix scan of PT KBI's January 2022 electricity bill is left out (owner, 31 Oct).
    - CV: no (web only)
 
 ## 8. Recognition
@@ -137,7 +137,10 @@ High school is not listed (owner's choice).
 ## 11. Contact
 
 - Closing line: "Let's build something safe."
-- Email, LinkedIn, GitHub, Download CV.
+- ⚠ confirm — two lines under it on the Full Mode closing screen (drafted 31 Oct from the Story's own lines):
+  - I build for the web, and then I look for where it breaks.
+  - If something you run has to hold, or you would rather find its weak spot before someone else does, write to me.
+- Email, LinkedIn, GitHub, Download CV. No "Contact" title in Full Mode (owner, 31 Oct).
 
 ## 12. Still Needed From the Owner
 - Four photos for the Bust (ARCHITECTURE.md §5).

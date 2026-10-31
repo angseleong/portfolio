@@ -84,10 +84,15 @@ Agreed with the owner in a grilling session, 31 Oct 2026.
 
 **Checkpoint:** Hero shows the name behind a large turning Bust; the Stack runs edge to edge under it; the About fits one screen with four photos that Develop. ✅ Verified 31 Oct at 1440×900 and 375×812, no horizontal scroll.
 
-## Block 6: Polish & Launch
-- [ ] Metadata, Open Graph image (name + Headline on black), favicon.
-- [ ] Lighthouse on mobile: Performance ≥ 85, Accessibility ≥ 95.
-- [ ] Final pass at 375×812, 768×1024, 1440×900.
+## ACTIVE — Block 6: Polish & Launch
+- [x] Metadata, Open Graph image (name + Headline on black), favicon. ✅ 31 Oct: `app/opengraph-image.tsx` (static, Instrument Serif + Geist Mono), `app/icon.svg`, Twitter large card. `metadataBase` falls back to the Vercel URL on deploy.
+- [x] Lighthouse on mobile: Performance ≥ 85, Accessibility ≥ 95. ✅ 31 Oct: mobile 40 → 85–89 (four runs), desktop 90 → 100, Accessibility 96. Fixes: three.js in its own chunk, loaded after the Hero paints and mounted when idle; Prints lazy-load; the Hero is in the server HTML (ADR-0012), largest paint 9.3 s → 2.0 s; the Hero holds with CSS sticky instead of a GSAP pin; phones draw at DPR ≤ 1.5 with a smaller reflection map.
+- [x] Bust fixes after review (owner, 31 Oct): no ragged ring where the head meets the neck (the joint is smoothed after the remesh), and the two ears match (the good ear mirrored, both thickened, remesh grid squared to the face). `scripts/bust/finish.py`, ARCHITECTURE.md §5.
+- [x] Owner review, 31 Oct: About line rewritten ("I read traces"); the name starts dim behind the Bust and comes forward on scroll; More Projects is an open list under the Line; Research featured, Recognition / Volunteering / Education in two columns; Contact fills the last screen. Full Mode only, Compact Mode unchanged.
+- [x] Owner review 2, 31 Oct: the name crossfade no longer shows a double (same letters, no scale); More Projects is a dropdown right under the Line again; the closing has no title, two more lines (⚠ confirm in DATA.md §11), a large email and the Bust's whole head watching the pointer; Compact Mode reads like a dense CV. Lighthouse mobile 79–93 over six runs, desktop 100.
+- [x] Owner review 3, 31 Oct: the closing shows the whole Bust with its plinth beside the text, following the cursor; opening More Projects no longer moves the page or breaks the Line; Print hover is off while scrolling, so the Reels don't reset at the end of the Line; the high-school paper is downloadable (98 pages, 3 MB, PT KBI's bill scan left out).
+- [x] Owner review 4, 31 Oct: the Darkroom is CSS sticky instead of a GSAP pin (refreshing the pin restarted the Prints' sway when More Projects opened); More Projects opens with a smooth height animation and no longer scrolls the page (scroll anchoring off under Lenis); the closing Bust follows the cursor more strongly and its plinth stays in frame.
+- [x] Final pass at 375×812, 768×1024, 1440×900. ✅ 31 Oct on the production build: Bust renders at all three, all four Prints load, no horizontal scroll, no console errors.
 - [ ] Production deploy on Vercel.
 
 **Checkpoint:** The `*.vercel.app` URL is ready to put on LinkedIn.

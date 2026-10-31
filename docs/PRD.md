@@ -41,8 +41,8 @@ The owner is an Informatics student at ITB targeting **security, software engine
 - The toggle choice is remembered per visitor (`localStorage`). `prefers-reduced-motion: reduce` starts in Compact Mode.
 
 ### FR-2 — Hero
-- The owner's name, very large, behind the Bust. The Headline under it.
-- The Hero is pinned for about two screens of scroll. Over that scroll the Bust turns ~180° (front → profile → back), the camera moves in, and the name widens and fades out. The Bust also keeps a slow idle turn.
+- The owner's name, very large, starts dim behind the Bust. The Headline under it.
+- The Hero holds still for about two screens of scroll. Over that scroll the Bust turns ~180° (front → profile → back), the camera moves in, and the name comes forward: the dim copy behind fades while a bright copy in front of the Bust grows in, inverted over the metal so it stays readable (owner, 31 Oct). The Bust also keeps a slow idle turn.
 - On phones the scroll is shorter and the Bust uses a lighter model.
 - Until the real Bust exists, a placeholder shape stands in (Block 4).
 
@@ -61,11 +61,12 @@ The owner is an Informatics student at ITB targeting **security, software engine
 - All Prints are horizontal and the same size: a 16:10 window on paper with the title under it. Behind the window is a tall Reel (pitch deck slides, dashboard pages or app screens) that pans down on hover.
 - On desktop a Print can be dragged; the Line stretches with it and springs back on release.
 - Tap or click Opens a Print: the paper grows downward with role, summary, tech and links, and the Reel pans. Click again or Esc to close.
-- Desktop: the Darkroom is pinned and vertical scroll slides the Line sideways. Phone: the Line is a horizontal swipe with snap, not pinned.
-- **More Projects** follows as one collapsed row ("More projects" + count) that continues the list above it. Tapping it opens the plain list: title, one line, tech, link. Closed by default, in both modes.
+- Desktop: the Darkroom holds still (CSS sticky) and vertical scroll slides the Line sideways. Phone: the Line is a horizontal swipe with snap, not pinned.
+- **More Projects** in Full Mode: a collapsed "More projects" row right under the Line, inside the Darkroom, that opens into two columns on laptops; opening it never moves the page or the Line (owner, 31 Oct). In Compact Mode: one collapsed row ("More projects" + count) that continues the list above it; tapping it opens the plain list: title, one line, tech, link.
 
 ### FR-6 — Research
-- A list: title, venue and date, one-line summary, links (paper, code, demo).
+- Full Mode (FR-6 to FR-9 together, owner 31 Oct): the first paper is featured large, the rest of Research follows as a list, then Recognition and Education share a left column with Volunteering down the right on laptops (one column in this order on phones).
+- A list: title, venue and date, one-line summary, links (paper, code, demo). The high-school paper is downloadable from `/research/plts-pt-kbi.pdf` (owner, 31 Oct).
 
 ### FR-7 — Recognition
 - One section with two groups, **Competitions** and **Certifications**, each a list: name, issuer, date, credential link if any.
@@ -78,9 +79,10 @@ The owner is an Informatics student at ITB targeting **security, software engine
 
 ### FR-10 — Contact
 - A large closing line, then email (mailto), LinkedIn, GitHub, and **Download CV**.
+- Full Mode (owner, 31 Oct): one full screen with no "Contact" title: the closing line, two short lines (`closingLines`), the email large under a small "email" label, the links, and the whole Bust with its plinth beside the text (right side on laptops, under the text on phones). It turns toward the pointer; on phones it sways slowly.
 
 ### FR-11 — Compact Mode
-- Every section above in one centered column in this order: name + Headline → About (the short Summary, not the Story) → Stack (as three wrapped lists) → Projects (Main Projects first, then More Projects) → Research → Recognition → Volunteering → Education → Contact.
+- Every section above in one column, read like a CV: on laptops each section's title sits in a narrow left column with the content on the right, hairlines between sections, little empty space (owner, 31 Oct). Order: name + Headline → About (the short Summary, not the Story) → Stack (as three wrapped lists) → Projects (Main Projects first, then More Projects) → Research → Recognition → Volunteering → Education → Contact.
 - No 3D, no GSAP, no Lenis are loaded in Compact Mode.
 
 ### FR-12 — CV Page and PDF

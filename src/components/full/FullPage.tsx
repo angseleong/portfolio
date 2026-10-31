@@ -2,18 +2,17 @@
 
 import "lenis/dist/lenis.css";
 import { useEffect, useRef } from "react";
-import { cv } from "@/data/cv";
 import { gsap, ScrollTrigger, startScroll } from "@/lib/scroll";
-import { Contact, EntryList, MoreProjects, Recognition, Section } from "../lists";
+import { Closing } from "./Closing";
 import { Darkroom } from "./Darkroom";
-import { Hero } from "./Hero";
+import { Record } from "./Record";
 import { Stack } from "./Stack";
 import { Story } from "./Story";
 
 const column = "mx-auto w-full max-w-[1080px] px-4 sm:px-8";
 
 export default function FullPage() {
-  const root = useRef<HTMLElement>(null);
+  const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stop = startScroll();
@@ -35,8 +34,8 @@ export default function FullPage() {
   }, []);
 
   return (
-    <main ref={root} id="top" className="w-full pb-32">
-      <Hero />
+    // The Hero is rendered by Page, above this (ADR-0012).
+    <div ref={root}>
       <Stack />
       <div className={column}>
         <Story />
@@ -48,26 +47,11 @@ export default function FullPage() {
       </div>
 
       <div className={column}>
-        <div className="mt-12 border-t border-line">
-          <MoreProjects />
-        </div>
-
-        <Section id="research" title="Research">
-          <EntryList entries={cv.research} />
-        </Section>
-
-        <Recognition />
-
-        <Section title="Volunteering">
-          <EntryList entries={cv.volunteering} />
-        </Section>
-
-        <Section title="Education">
-          <EntryList entries={cv.education} />
-        </Section>
-
-        <Contact />
+        <Record />
       </div>
-    </main>
+
+      {/* Full width: the head rises from the bottom edge of the last screen. */}
+      <Closing />
+    </div>
   );
 }

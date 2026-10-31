@@ -23,14 +23,23 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: cv.name,
   description: cv.headline,
+  openGraph: { title: cv.name, description: cv.headline, type: "website" },
+  twitter: { card: "summary_large_image" },
 };
+
+// ADR-0012: the same rule as read() in mode.tsx, run before the first paint so CSS can show the right first screen.
+const pickMode = `(function(){var m;try{m=localStorage.getItem("mode")}catch(e){}if(m!=="full"&&m!=="compact")m=matchMedia("(prefers-reduced-motion: reduce)").matches?"compact":"full";document.documentElement.dataset.mode=m})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${instrumentSerif.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: pickMode }} />
+      </head>
       <body className="min-h-full flex flex-col">
         {children}
       </body>

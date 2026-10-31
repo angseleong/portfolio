@@ -8,14 +8,14 @@
 
 | Visitor scrolls through | What happens |
 |---|---|
-| Hero (~2 screens) | The Bust turns from front to back, the camera moves in, the name fades. |
+| Hero (~2 screens) | The Bust turns from front to back, the camera moves in, the name comes forward from behind the Bust to in front of it. |
 | Stack | Right under the Hero, edge to edge. Three Lanes slide sideways. Hovering pauses a Lane and lights the item white. |
 | Story (1 screen) | The statement Develops word by word; the four photos Develop one after another. |
 | Darkroom (desktop) | The page holds still; scrolling slides the Line so each Print passes by. Prints Sway; the cursor gives them Wind; each Print Develops once. |
 | Darkroom (phone) | Swipe the Line sideways; it snaps to each Print. |
-| More Projects | One collapsed row under the Main Projects. Tap to open the list, tap again to close. |
-| Research → Recognition → Volunteering → Education | Plain lists. Links open in a new tab. |
-| Contact | Closing line, email, LinkedIn, GitHub, Download CV. |
+| More Projects | One collapsed row right under the Line (Full Mode) or under the Main Projects (Compact Mode). Tap to open, tap again to close. |
+| Research → Recognition → Volunteering → Education | The first paper featured, then the rest in two columns on laptops (one column on phones). Links open in a new tab. |
+| Contact | One full screen, no title: closing line, two lines, the email large, links. The whole Bust stands beside the text and turns to watch the pointer. |
 
 ## 3. Reading a Main Project
 1. Hover a Print: its Reel pans down through the whole image.

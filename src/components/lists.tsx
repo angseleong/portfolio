@@ -1,15 +1,16 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useId, useState, type ReactNode } from "react";
 import { cv, type Entry, type Link, type Project } from "@/data/cv";
 
-// Shared by Compact Mode now and Full Mode later (ARCHITECTURE.md §1).
+// Rows and lists are shared by both modes; Section, Intro and Contact are Compact Mode's (ARCHITECTURE.md §1).
 
 export function Section({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-20 pt-24 sm:pt-40">
-      <h2 data-reveal className="font-display text-[32px] leading-tight sm:text-5xl">{title}</h2>
-      <div data-reveal className="mt-8 sm:mt-12">
-        {children}
-      </div>
+    // Compact Mode reads like a CV (owner, 31 Oct): on laptops the title sits in a narrow left column.
+    <section id={id} className="mt-12 grid scroll-mt-20 gap-6 border-t border-line pt-8 md:grid-cols-[180px_1fr] md:gap-12">
+      <h2 className="font-display text-[28px] leading-tight md:text-[32px]">{title}</h2>
+      <div className="min-w-0">{children}</div>
     </section>
   );
 }
@@ -61,9 +62,9 @@ export function EntryList({ entries }: { entries: Entry[] }) {
   );
 }
 
-export function ProjectList({ projects }: { projects: Project[] }) {
+export function ProjectList({ projects, className }: { projects: Project[]; className?: string }) {
   return (
-    <ul>
+    <ul className={className}>
       {projects.map((p) => (
         <Row key={p.slug} title={p.title} meta={p.role}>
           <p className="mt-2 text-stone">{p.summary}</p>
@@ -78,16 +79,16 @@ export function ProjectList({ projects }: { projects: Project[] }) {
 // Name + Headline. Full Mode replaces this with the Bust Hero in Block 4.
 export function Intro() {
   return (
-    <header className="flex min-h-[70svh] flex-col justify-end pb-8">
-      <h1 className="font-display text-[clamp(64px,14vw,200px)] leading-[0.95] tracking-[-0.02em]">{cv.name}</h1>
-      <p className="mt-6 max-w-[640px] text-lg text-stone">{cv.headline}</p>
+    <header className="pb-4 pt-16 sm:pt-24">
+      <h1 className="font-display text-[clamp(52px,10vw,120px)] leading-[0.95] tracking-[-0.02em]">{cv.name}</h1>
+      <p className="mt-4 max-w-[640px] text-lg text-stone">{cv.headline}</p>
     </header>
   );
 }
 
-function Group({ label, children }: { label: string; children: ReactNode }) {
+export function Group({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="mt-16 first:mt-0">
+    <div className="mt-10 first:mt-0">
       <h3 className="mb-6 font-mono text-xs lowercase tracking-[0.08em] text-dust">{label}</h3>
       {children}
     </div>
@@ -97,22 +98,37 @@ function Group({ label, children }: { label: string; children: ReactNode }) {
 export const mainProjects = cv.projects.filter((p) => p.print);
 export const moreProjects = cv.projects.filter((p) => !p.print);
 
-// Collapsed row that continues the Main Projects list; native <details>, no JS.
-export function MoreProjects() {
+// Collapsed row that continues the Main Projects list. It opens with a height transition (owner, 31 Oct), then
+// calls onSettled so a page with scroll scenes can re-measure.
+export function MoreProjects({ className, onSettled }: { className?: string; onSettled?: () => void }) {
+  const [open, setOpen] = useState(false);
+  const id = useId();
   return (
-    <details className="group/more">
-      <summary className="group flex cursor-pointer list-none items-center justify-between border-b border-line py-6 [&::-webkit-details-marker]:hidden">
+    <div className="group/more" data-open={open || undefined}>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen(!open)}
+        className="group flex w-full cursor-pointer items-center justify-between border-b border-line py-6 text-left"
+      >
         <span className="text-lg leading-7 text-stone group-hover:font-display group-hover:text-[21px] group-hover:italic group-hover:text-light">
           More projects <span className="font-mono text-xs not-italic text-dust">{moreProjects.length}</span>
         </span>
-        <span aria-hidden className="inline-block text-xl text-dust transition-transform group-open/more:rotate-45 group-hover:text-light">
+        <span aria-hidden className="inline-block text-xl text-dust transition-transform group-hover:text-light group-data-open/more:rotate-45">
           +
         </span>
-      </summary>
-      <div className="[&>ul>li:first-child]:border-t-0">
-        <ProjectList projects={moreProjects} />
+      </button>
+      <div
+        id={id}
+        onTransitionEnd={(e) => e.target === e.currentTarget && e.propertyName === "grid-template-rows" && onSettled?.()}
+        className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-open/more:grid-rows-[1fr] group-data-open/more:opacity-100 motion-reduce:transition-none"
+      >
+        <div inert={!open} className="min-h-0 overflow-hidden [&>ul>li:first-child]:border-t-0">
+          <ProjectList projects={moreProjects} className={className} />
+        </div>
       </div>
-    </details>
+    </div>
   );
 }
 
@@ -131,8 +147,8 @@ export function Recognition() {
 export function Contact() {
   return (
     <Section id="contact" title="Contact">
-      <p className="max-w-[16ch] font-display text-[40px] leading-[1.05] sm:text-7xl">{cv.closing}</p>
-      <ul className="mt-12 flex flex-col gap-3 text-lg sm:flex-row sm:flex-wrap sm:gap-x-8">
+      <p className="font-display text-[32px] leading-[1.05] sm:text-5xl">{cv.closing}</p>
+      <ul className="mt-8 flex flex-col gap-3 text-lg sm:flex-row sm:flex-wrap sm:gap-x-8">
         <li>
           <a href={`mailto:${cv.email}`} className="text-marble underline-offset-4 hover:text-light hover:underline">
             {cv.email}

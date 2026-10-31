@@ -8,7 +8,7 @@ const KEY = "mode";
 const EVENT = "modechange";
 const reducedMotion = "(prefers-reduced-motion: reduce)";
 
-// ARCHITECTURE.md §3: stored choice, else reduced motion → compact, else full.
+// ARCHITECTURE.md §3: stored choice, else reduced motion → compact, else full. The layout's inline script repeats this.
 function read(): Mode {
   try {
     const stored = localStorage.getItem(KEY);
@@ -36,7 +36,7 @@ export function setMode(mode: Mode) {
   window.dispatchEvent(new Event(EVENT));
 }
 
-/** Server render (and the first client render) is always Compact Mode. */
-export function useMode(): Mode {
-  return useSyncExternalStore(subscribe, read, () => "compact");
+/** Null on the server and in the first client render: the inline script in the layout has picked the first screen (ADR-0012). */
+export function useMode(): Mode | null {
+  return useSyncExternalStore(subscribe, read, () => null);
 }

@@ -27,6 +27,12 @@ HEAD_TURN = 35  # degrees; the template neck was carved for about 43
 TUCK = 0.004  # the template neck reaches this far up inside the scan head, so no gap shows
 HEIGHT = 2.0
 MOSAIC_VOXEL = 0.02  # in HEIGHT units: coarse enough to fuse the hair sheets into solid locks
+SEAM_BAND = 0.08  # in HEIGHT units: how far above and below the head/neck joint is smoothed
+SEAM_PASSES = 20  # Smooth modifier iterations on that band
+EAR_Y, EAR_Z, EAR_R = 0.006, 1.10, 0.14  # scan units: both ears sit here, one on each side of the head
+EAR_MID_X = 0.0255  # scan units: halfway between the ears, the head's midline
+EAR_CUT = 0.27  # scan units from the midline: past the cheek, so the mirrored patch is the ear and the skin around it
+EAR_THICKEN = 0.012  # scan units: thin ear folds turn into rings at the mosaic's voxel size
 
 
 def select_only(o):
@@ -104,7 +110,38 @@ co = get_co(head.data)
 chin = co[(co[:, 1] < -0.35) & (co[:, 2] > 0.6) & (abs(co[:, 0]) < 0.2)][:, 2].min()
 cut_z = chin + CUT_LIFT
 bisect(head, (0, -0.5, cut_z), (0, -CUT_SLOPE, 1), keep_below=False)
+# The scan's two ears differ, and its -X ear turns into a round ring in the remesh. Replace it with the +X ear,
+# mirrored across the face's midline; the remesh below fuses the patch into the head.
+bm = bmesh.new()
+bm.from_mesh(head.data)
+
+
+def in_ear(v, side):
+    return (v.co.x - EAR_MID_X) * side > EAR_CUT and abs(v.co.y - EAR_Y) < EAR_R and abs(v.co.z - EAR_Z) < EAR_R
+
+
+bmesh.ops.delete(bm, geom=[f for f in bm.faces if all(in_ear(v, -1) for v in f.verts)], context="FACES")
+copy = bmesh.ops.duplicate(bm, geom=[f for f in bm.faces if all(in_ear(v, 1) for v in f.verts)])["geom"]
+for v in copy:
+    if isinstance(v, bmesh.types.BMVert):
+        v.co.x = 2 * EAR_MID_X - v.co.x
+bmesh.ops.reverse_faces(bm, faces=[f for f in copy if isinstance(f, bmesh.types.BMFace)])  # mirrored faces point inward
+bm.to_mesh(head.data)
+bm.free()
+head.data.update()
+# Thicken both ears the same amount, so the coarse remesh keeps each one as a solid ear instead of a ring.
 co = get_co(head.data)
+no = np.empty(len(head.data.vertices) * 3)
+head.data.vertices.foreach_get("normal", no)
+no = no.reshape(-1, 3)
+for side in (-1, 1):
+    near = (abs(co[:, 1] - EAR_Y) < EAR_R) & (abs(co[:, 2] - EAR_Z) < EAR_R) & (co[:, 0] * side > 0)
+    centre = np.array((co[near, 0].max() if side > 0 else co[near, 0].min(), EAR_Y, EAR_Z))
+    centre[0] -= side * 0.04  # the middle of the ear, not its outer rim
+    w = np.clip(1 - np.linalg.norm(co - centre, axis=1) / EAR_R, 0, 1)
+    co += no * (EAR_THICKEN * w * w * (3 - 2 * w))[:, None]
+    print("FINISH ear", side, centre)
+set_co(head.data, co)
 s_lo, s_hi = co.min(axis=0), co.max(axis=0)
 scale = (t_hi[2] - TEMPLATE_CHIN) / (s_hi[2] - chin)  # match chin-to-crown heights
 offset = (t_lo + t_hi) / 2 - (s_lo + s_hi) / 2 * scale
@@ -166,8 +203,14 @@ print("FINISH rim points", len(rim))
 # 4. Center on the turning axis and scale to HEIGHT so the camera in BustScene.tsx frames it.
 both = np.vstack([get_co(head.data), get_co(body.data)])
 lo, hi = both.min(axis=0), both.max(axis=0)
+k = HEIGHT / (hi[2] - lo[2])
 for obj in (head, body):
-    set_co(obj.data, (get_co(obj.data) - (lo + hi) / 2) * HEIGHT / (hi[2] - lo[2]))
+    set_co(obj.data, (get_co(obj.data) - (lo + hi) / 2) * k)
+seam_co = (plane_co - np.array((0, 0, TUCK)) - (lo + hi) / 2) * k  # the head's cut, where the ledge shows
+# The head's midline, so the remesh grid can be lined up with the face (else the two ears come out different).
+mid = np.array((EAR_MID_X, 0, 0)) * scale + offset
+mid[:2] = (mid[:2] - pivot[:2]) @ rot.T + pivot[:2]
+mid = (mid - (lo + hi) / 2) * k
 print("FINISH tris head", tris(head), "body", tris(body))
 
 # 5. Mosaic (owner's call): fuse head and body with a coarse voxel remesh, which also hides the neck joint and
@@ -176,8 +219,23 @@ select_only(head)
 body.select_set(True)
 bpy.ops.object.join()
 bust = bpy.context.view_layer.objects.active
+square = Matrix.Rotation(-turn, 4, "Z") @ Matrix.Translation((mid[0], mid[1], 0)).inverted()
+bust.data.transform(square)  # face along -Y and midline on x = 0, so the grid treats both sides alike
 bust.data.remesh_voxel_size = MOSAIC_VOXEL
 bpy.ops.object.voxel_remesh()
+bust.data.transform(square.inverted())
+# The scan's head ends in a ragged ring where it meets the neck. Smooth only a band around that cut, fading out
+# above and below, so the joint disappears and the face and hair keep their shape.
+co = get_co(bust.data)
+dist = abs((co - seam_co) @ n) / SEAM_BAND
+seam = bust.vertex_groups.new(name="seam")
+for i, w in enumerate(np.clip(1 - dist, 0, 1)):
+    if w > 0:
+        seam.add([i], float(w * w * (3 - 2 * w)), "REPLACE")
+smooth = bust.modifiers.new("seam", "SMOOTH")
+smooth.vertex_group, smooth.factor, smooth.iterations = "seam", 1.0, SEAM_PASSES
+bpy.ops.object.modifier_apply(modifier=smooth.name)
+bust.vertex_groups.remove(bust.vertex_groups["seam"])
 for name, target in TARGETS.items():
     while tris(bust) > target * 1.1:  # one Decimate pass can fall short
         dec = bust.modifiers.new("dec", "DECIMATE")
