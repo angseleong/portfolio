@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* Tokens: docs/DESIGN.md §2. Dark only. */
+:root {
+  --ink: #0b0b0b;
+  --ink-2: #141414;
+  --line: #262626;
+  --marble: #e9e4da;
+  --stone: #a8a39a;
+  --dust: #6e6a63;
+  --light: #ffffff;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-line: var(--line);
+  --color-marble: var(--marble);
+  --color-stone: var(--stone);
+  --color-dust: var(--dust);
+  --color-light: var(--light);
+  --font-display: var(--font-instrument-serif);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  --animate-rise: rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  /* The Hero name's letters, once on load (DESIGN.md §8). */
+  @keyframes rise {
+    from {
+      translate: 0 40%;
+      opacity: 0;
+    }
+  }
+
+  --animate-sway: sway 4.2s ease-in-out infinite alternate;
+
+  @keyframes sway {
+    from {
+      rotate: -3deg;
+    }
+    to {
+      rotate: 3deg;
+    }
+  }
+}
+
+/* ADR-0012: before hydration the HTML holds both first screens; the layout's script sets data-mode. */
+html:not([data-mode="full"]) [data-first="full"],
+html[data-mode="full"] [data-first="compact"] {
+  display: none;
+}
+
+/* While Lenis scrolls, the Line slides under a still cursor: without this, every Print it passes starts its Reel pan
+   and snaps back. Hover comes back as soon as the scroll stops. */
+html.lenis-scrolling [data-print] {
+  pointer-events: none;
+}
+
+/* Darkroom Print: Develop once (DESIGN.md §6). */
+.print-photo {
+  filter: brightness(1.8) contrast(0.3);
+  transition: filter 1s ease-out;
+}
+[data-developed] .print-photo {
+  filter: none;
+}
+
+/* About photos: Develop once like a Print, rest in black and white, colour on hover or tap (DESIGN.md §8). */
+.about-photo {
+  filter: grayscale(1) brightness(1.8) contrast(0.3);
+  transition: filter 1s ease-out;
+}
+[data-developed] .about-photo {
+  filter: grayscale(1) brightness(0.88);
+}
+[data-developed] .about-photo:hover,
+[data-developed] .about-photo[data-color] {
+  filter: none;
+  transition-duration: 0.5s;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+/* Lenis does its own smoothing in Full Mode. Scroll anchoring off: when More Projects opens, the browser kept the
+   content below in place by scrolling ~500 px, so the room shot up (owner saw the page "drop", 31 Oct). */
+html.lenis {
+  scroll-behavior: auto;
+  overflow-anchor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* CV Page (ARCHITECTURE.md §6). */
+@page {
+  size: A4;
+  margin: 12mm 14mm;
+}
+
+:focus-visible {
+  outline: 1px solid var(--light);
+  outline-offset: 3px;
+}
+
+body {
+  background: var(--ink);
+  color: var(--marble);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* After the body rule so it wins: no dark edge around the CV PDF. */
+@media print {
+  html {
+    color-scheme: light;
+  }
+  body {
+    background: #fff;
+  }
+}

@@ -41,32 +41,35 @@ The owner is an Informatics student at ITB targeting **security, software engine
 - The toggle choice is remembered per visitor (`localStorage`). `prefers-reduced-motion: reduce` starts in Compact Mode.
 
 ### FR-2 — Hero
-- The owner's name, very large, behind the Bust. The Headline under it.
-- The Hero is pinned for about two screens of scroll. Over that scroll the Bust turns ~180° (front → profile → back), the camera moves in, and the name fades out.
+- The owner's name, very large, starts dim behind the Bust. The Headline under it.
+- The Hero holds still for about two screens of scroll. Over that scroll the Bust turns ~180° (front → profile → back), the camera moves in, and the name comes forward: the dim copy behind fades while a bright copy in front of the Bust grows in, inverted over the metal so it stays readable (owner, 31 Oct). The Bust also keeps a slow idle turn.
 - On phones the scroll is shorter and the Bust uses a lighter model.
 - Until the real Bust exists, a placeholder shape stands in (Block 4).
 
 ### FR-3 — Story
-- Four lines from `docs/DATA.md` §2, one per screen height. Each line Develops word by word as it scrolls into the middle of the screen.
+- One screen from `docs/DATA.md` §2: an epigraph, a statement that Develops word by word, two short lines, and a contact sheet of four photos. No pin.
 
 ### FR-4 — Stack
-- Three Lanes (Languages, Frameworks, Security & Tools), 6 items each, in a Marquee. Neighbouring Lanes run in opposite directions.
-- Each item: monochrome logo + label. Hover: the Lane pauses, the item's logo turns amber.
+- Right after the Hero, full-bleed, no title. Three Lanes (Languages, Frameworks, Security & Tools), 6 items each, in a Marquee. Neighbouring Lanes run in opposite directions.
+- Each item: monochrome logo + label. Hover: the Lane pauses, the item's logo and label turn white.
 - No skill levels, bars or percentages.
 
 ### FR-5 — Darkroom (Projects)
-- The three Main Projects hang as Prints on one Line under an amber light.
+- The four Main Projects (OSKM Dashboard, OSKM Open House Unit, RONDA, lafaz) hang as Prints on one Line under the white light of an enlarger.
 - Prints Sway out of phase. The cursor passing near a Print gives it Wind.
 - Each Print Develops the first time it enters the screen (~1 s), then stays a plain screenshot.
-- Tap or click Flips a Print to its Back: title, role, summary, tech, links. Tapping again flips it back. Only one Print is flipped at a time.
-- Desktop: the Darkroom is pinned and vertical scroll slides the Line sideways. Phone: the Line is a horizontal swipe with snap, not pinned.
-- **More Projects** follows as a plain list: title, one line, tech, link.
+- All Prints are horizontal and the same size: a 16:10 window on paper with the title under it. Behind the window is a tall Reel (pitch deck slides, dashboard pages or app screens) that pans down on hover.
+- On desktop a Print can be dragged; the Line stretches with it and springs back on release.
+- Tap or click Opens a Print: the paper grows downward with role, summary, tech and links, and the Reel pans. Click again or Esc to close.
+- Desktop: the Darkroom holds still (CSS sticky) and vertical scroll slides the Line sideways. Phone: the Line is a horizontal swipe with snap, not pinned.
+- **More Projects** in Full Mode: a collapsed "More projects" row right under the Line, inside the Darkroom, that opens into two columns on laptops; opening it never moves the page or the Line (owner, 31 Oct). In Compact Mode: one collapsed row ("More projects" + count) that continues the list above it; tapping it opens the plain list: title, one line, tech, link.
 
 ### FR-6 — Research
-- A list: title, venue and date, one-line summary, links (paper, code, demo).
+- Full Mode (FR-6 to FR-9 together, owner 31 Oct): the first paper is featured large, the rest of Research follows as a list, then Recognition and Education share a left column with Volunteering down the right on laptops (one column in this order on phones).
+- A list: title, venue and date, one-line summary, links (paper, code, demo). The high-school paper is downloadable from `/research/plts-pt-kbi.pdf` (owner, 31 Oct).
 
 ### FR-7 — Recognition
-- One list for competitions and certifications: name, issuer, date, credential link if any.
+- One section with two groups, **Competitions** and **Certifications**, each a list: name, issuer, date, credential link if any.
 
 ### FR-8 — Volunteering
 - A list: organization, role, period, one line.
@@ -76,14 +79,15 @@ The owner is an Informatics student at ITB targeting **security, software engine
 
 ### FR-10 — Contact
 - A large closing line, then email (mailto), LinkedIn, GitHub, and **Download CV**.
+- Full Mode (owner, 31 Oct): one full screen with no "Contact" title: the closing line, two short lines (`closingLines`), the email large under a small "email" label, the links, and the whole Bust with its plinth beside the text (right side on laptops, under the text on phones). It turns toward the pointer; on phones it sways slowly.
 
 ### FR-11 — Compact Mode
-- Every section above in one centered column in this order: name + Headline → Story (as one paragraph) → Stack (as three wrapped lists) → Projects (Main Projects first, then More Projects) → Research → Recognition → Volunteering → Education → Contact.
+- Every section above in one column, read like a CV: on laptops each section's title sits in a narrow left column with the content on the right, hairlines between sections, little empty space (owner, 31 Oct). Order: name + Headline → About (the short Summary, not the Story) → Stack (as three wrapped lists) → Projects (Main Projects first, then More Projects) → Research → Recognition → Volunteering → Education → Contact.
 - No 3D, no GSAP, no Lenis are loaded in Compact Mode.
 
 ### FR-12 — CV Page and PDF
-- `/cv`: one A4 page, black on white, one sans-serif font, single column, no icons or images, real text (selectable, ATS-parseable).
-- It uses the CV-only choices in `docs/DATA.md` (Research #1 only, top 4 Volunteering, the short summary).
+- `/cv`: one A4 page in the format of the owner's own CV (Times New Roman, navy headings, dates on the right), single column, no icons or images, real text (selectable, ATS-parseable).
+- It uses the CV-only choices in `docs/DATA.md` (Projects up to INTEL, Research #1 only, top 4 Volunteering, the short summary, Recognition titled "Achievements & Certifications").
 - `npm run cv` writes `public/cv.pdf` from `/cv` with headless Chrome.
 
 ## 5. Non-Functional Requirements

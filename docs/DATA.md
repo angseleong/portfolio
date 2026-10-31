@@ -20,18 +20,21 @@ Items marked **⚠ confirm** are assumptions the owner has not confirmed yet.
 
 ## 2. Story (web)
 
-Built only from the owner's own answers (why security, what keeps them building, life outside code):
+Rewritten with the owner, 31 Oct 2026 (built from their own answers and the Minecraft paper in §7):
 
-1. Every leap forward leaves something exposed.
-2. Security is the price of progress, and I want to be the one who pays it carefully.
-3. I don't stay up for the code. I stay up because what I ship might help a lot of people.
-4. When I'm not building, I'm telling stories, or learning something new.
+- Epigraph: "Nature loves to hide." — Heraclitus
+- Statement: Every leap forward leaves something exposed. I want to be the one who finds it first.
+- Line: Once, a single screenshot of bedrock gave away a hidden Minecraft base. What hides still leaves a trace. I read traces. (Owner picked this more poetic version, 31 Oct.)
+- Line: I don't stay up for the code. I stay up because what I ship might reach a lot of people. The rest of the time, I'm out talking with them.
+- Photos (contact sheet, in order): talking a problem through with two friends over a laptop; holding an ITB Informatics student flag; holding a flag on the steps under the yellow HMIF ITB banners (replaced the Faculty of Medicine photo, 31 Oct); this portfolio's code on the owner's monitor. Files `public/about-1..4.jpg`.
 
-**Compact Mode** joins the four lines into one paragraph.
+The Story is Full Mode only. **Compact Mode** shows the Summary (§3) as its About instead.
 
-## 3. Summary (CV only)
+## 3. Summary (CV + Compact Mode About)
 
-> Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation website.
+> Second-year Informatics student at Institut Teknologi Bandung (GPA 3.90/4.00) focused on security and web engineering. I want to become an ethical technologist who builds systems that work, stay secure and can be trusted, while I keep learning and give back to the communities I work with. I bring care and attention to detail to every project, from web apps to security tools. My strength is adapting across technical domains; my growth area is depth, which I work on by setting focused learning goals in cybersecurity.
+
+Adjusted from the profile in the owner's own Tech CV (31 Oct 2026).
 
 ## 4. Stack
 
@@ -45,27 +48,39 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 
 ## 5. Main Projects (Prints, in this order)
 
-### OSKM ITB 2026 Website
+On the CV, Project Experience lists only RONDA, lafaz and INTEL. The two OSKM projects are covered by the OSKM role under Organizational Experience (`cv: false`).
+
+### OSKM ITB 2026 Dashboard
 - Role: Frontend Developer
-- Summary: Frontend developer for the official website of OSKM ITB 2026, ITB's annual new-student orientation.
+- Summary: Frontend developer for the internal dashboard of OSKM ITB 2026, ITB's annual new-student orientation, used by the committee and mentors.
+- Note: the owner's work is the internal dashboard (repo `frontend-dashboard-oskm`), not the public site.
 - Tech: Next.js, TypeScript, Tailwind CSS, shadcn/ui
 - Links: none (organization repo)
-- Print: `/prints/oskm.png` (owner provides a plain screenshot)
+- Reel: `/prints/oskm.jpg`, five dashboard pages from Valley stacked with a 14 px dark gap (login, event management, assignments, materials, assignment list); pages with student names left out. Dashboard pages are one screen tall, so there is no single long page to capture.
+
+### OSKM Open House Unit
+- Role: Frontend Developer
+- Summary: Open house website where new ITB students found student clubs, the stage rundown and an interactive venue map. On the frontend team I built the club (UKM) directory: the category pages and the club cards that lead to each club's page. (From the owner's Valley write-up.)
+- Tech: Next.js, TypeScript, Tailwind CSS
+- Links: none (organization repo `KAT-ITB-2026/frontend-ohu`)
+- Reel: `/prints/ohu.jpg`, one continuous full-page capture of the Lembaga page (UKM, BSO, HMPS, footer), taken from the running site
 
 ### RONDA
 - Summary: An Android app that catches scam APKs the moment they're installed and alerts a trusted guardian, who can uninstall or whitelist them remotely. Top 30, HackNusa 2026.
 - Role: not shown (owner's choice).
 - Tech: Kotlin, Jetpack Compose, Firebase
 - Links: GitHub https://github.com/angseleong/RONDA
-- Print: `/prints/ronda.png`
+- Reel: `/prints/ronda.jpg`, the HackNusa pitch deck slides stacked (slide 8, the YouTube player, left out)
 
 ### lafaz
 - Summary: A web app for learning to read the Qur'an by voice. Speech recognition (Whisper) runs entirely in the browser, so recordings never leave the device. Built with a friend, in development.
 - Tech: Next.js, TypeScript, Transformers.js
 - Links: GitHub https://github.com/adnankurniawann/lafaz
-- Print: `/prints/lafaz.png`
+- Reel: `/prints/lafaz.jpg`, Pelita + wordmark, then six phone screens three per row
 
 ## 6. More Projects
+
+On the CV only INTEL is listed; the rest are web only (`cv: false`).
 
 | Title | One line | Tech | Link |
 |---|---|---|---|
@@ -78,7 +93,7 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 
 ## 7. Research
 
-1. **Reverse-Engineering World Coordinates from a Single Screenshot**
+1. **Implementation of Binary Matrix Operations and the Sliding Window Algorithm for Reverse Engineering Spatial Coordinates in Minecraft Java Edition 1.12.2**
    - Venue: Discrete Mathematics (IF1220) paper, ITB · Jun 2026
    - Summary: Recovers a "hidden" Minecraft base location from one screenshot of the bedrock floor by reversing Java's LCG and matching binary patterns with a sliding window.
    - Links: Paper https://informatika.stei.itb.ac.id/~rinaldi.munir/Matdis/2025-2026/Makalah2026/13525074_Axeleon%20Justin%20A_Implementasi%20Operasi%20Matriks%20Biner%20dan%20Algoritma%20Sliding%20Window%20untuk%20Reverse%20Engineering%20Koordinat%20Spasial%20Minecraft%201.12.pdf · Code https://github.com/angseleong/bedrockfinder · Demo https://youtu.be/qhCnO69BHlY
@@ -86,10 +101,12 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 2. **Planning a 356 kWp Rooftop Solar Plant for PT Karunia Berca Indonesia**
    - Venue: High school final paper, SMA Labschool Kebayoran · 2024–2025
    - Summary: Designed an on-grid rooftop solar plant in Helioscope (792 panels) that covers 37% of the factory's daily use and cuts its yearly bill by 26%, and checked it with power-flow, short-circuit and economic analysis.
-   - Links: none
+   - Links: Paper (PDF, Indonesian) `/research/plts-pt-kbi.pdf` — 98 pages, compressed to 3 MB; the appendix scan of PT KBI's January 2022 electricity bill is left out (owner, 31 Oct).
    - CV: no (web only)
 
 ## 8. Recognition
+
+One section, two groups: **Competitions** (Vortex, HackNusa) and **Certifications** (CyberWarFare Labs, Cisco). The CV titles it **Achievements & Certifications**.
 
 | Title | Issuer | Date | Link | CV |
 |---|---|---|---|---|
@@ -102,8 +119,8 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 
 | Organization | Role | Period | One line |
 |---|---|---|---|
-| Inkubator IT | Media Intelligence Associate | Aug 2026 – Present | Writes copy for Inkubator IT's Instagram content. |
-| OSKM ITB 2026 | Frontend Developer | Jul 2026 – Present | Builds the frontend of the orientation website. |
+| Inkubator IT | Media Intelligence Associate | Aug 2026 – Oct 2026 | Wrote copy for Inkubator IT's Instagram content. |
+| OSKM ITB 2026 | Frontend Developer | Jul 2026 – Sep 2026 | Built the frontend of the internal dashboard for ITB's annual new-student orientation, used by the committee and mentors. Built the club (UKM) directory of the Open House Unit site: the category pages and the club cards that lead to each club's page. |
 | GDGoC ITB | AI Explorer | Jun 2026 – Present | Hands-on AI learning track. |
 | Aku Masuk ITB 2026 | Event Organizer | Dec 2025 – Feb 2026 | Managed the execution and alignment of MoUs with partners. |
 | STEI-K ITB 2025 | Internal Relation Staff | Aug 2025 – Jun 2026 | Handled internal public relations for the cohort. |
@@ -120,9 +137,11 @@ High school is not listed (owner's choice).
 ## 11. Contact
 
 - Closing line: "Let's build something safe."
-- Email, LinkedIn, GitHub, Download CV.
+- ⚠ confirm — two lines under it on the Full Mode closing screen (drafted 31 Oct from the Story's own lines):
+  - I build for the web, and then I look for where it breaks.
+  - If something you run has to hold, or you would rather find its weak spot before someone else does, write to me.
+- Email, LinkedIn, GitHub, Download CV. No "Contact" title in Full Mode (owner, 31 Oct).
 
 ## 12. Still Needed From the Owner
-- Screenshots: `oskm.png`, `ronda.png`, `lafaz.png`.
 - Four photos for the Bust (ARCHITECTURE.md §5).
 - The two **⚠ confirm** items above.
