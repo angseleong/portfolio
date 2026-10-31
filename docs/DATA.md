@@ -25,7 +25,7 @@ Rewritten with the owner, 31 Oct 2026 (built from their own answers and the Mine
 - Epigraph: "Nature loves to hide." — Heraclitus
 - Statement: Every leap forward leaves something exposed. I want to be the one who finds it first.
 - Line: Once, a single screenshot of bedrock gave away a hidden Minecraft base. What hides still leaves a trace. I read traces. (Owner picked this more poetic version, 31 Oct.)
-- Line: I don't stay up for the code. I stay up because what I ship might reach a lot of people. The rest of the time, I'm out talking with them.
+- Line: I don't stay up for the code. I stay up because what I ship might reach a lot of people, so I sweat the details no one will notice. Every night I try to prove, once more, that I can. (Owner added attention to detail and self-efficacy, dropped the "talking with them" sentence, 31 Oct.)
 - Photos (contact sheet, in order): talking a problem through with two friends over a laptop; holding an ITB Informatics student flag; holding a flag on the steps under the yellow HMIF ITB banners (replaced the Faculty of Medicine photo, 31 Oct); this portfolio's code on the owner's monitor. Files `public/about-1..4.jpg`.
 
 The Story is Full Mode only. **Compact Mode** shows the Summary (§3) as its About instead.

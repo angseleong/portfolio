@@ -73,7 +73,7 @@ export const cv: CV = {
     statement: "Every leap forward leaves something exposed. I want to be the one who finds it first.",
     lines: [
       "Once, a single screenshot of bedrock gave away a hidden Minecraft base. What hides still leaves a trace. I read traces.",
-      "I don't stay up for the code. I stay up because what I ship might reach a lot of people. The rest of the time, I'm out talking with them.",
+      "I don't stay up for the code. I stay up because what I ship might reach a lot of people, so I sweat the details no one will notice. Every night I try to prove, once more, that I can.",
     ],
     photos: [
       { src: "/about-1.jpg", alt: "Talking through a problem with two friends over a laptop." },
