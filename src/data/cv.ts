@@ -13,6 +13,8 @@ export type Project = {
   /** A Project with a print is a Main Project. A tall Reel image that pans inside a 16:10 frame. */
   print?: string;
   period?: string;
+  /** false = web only, left out of the CV Page. */
+  cv?: boolean;
 };
 
 export type Entry = {
@@ -66,7 +68,7 @@ export const cv: CV = {
     "When I'm not building, I'm telling stories, or learning something new.",
   ],
   summary:
-    "Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation dashboard.",
+    "Second-year Informatics student at Institut Teknologi Bandung (GPA 3.90/4.00) focused on security and web engineering. I want to become an ethical technologist who builds systems that work, stay secure and can be trusted, while I keep learning and give back to the communities I work with. I bring care and attention to detail to every project, from web apps to security tools. My strength is adapting across technical domains; my growth area is depth, which I work on by setting focused learning goals in cybersecurity.",
   closing: "Let's build something safe.",
 
   stack: [
@@ -108,6 +110,7 @@ export const cv: CV = {
   projects: [
     {
       slug: "oskm",
+      cv: false, // on the CV it sits under the OSKM role in Organizational Experience
       title: "OSKM ITB 2026 Dashboard",
       role: "Frontend Developer",
       summary:
@@ -118,6 +121,7 @@ export const cv: CV = {
     },
     {
       slug: "ohu",
+      cv: false,
       title: "OSKM Open House Unit",
       role: "Frontend Developer",
       summary:
@@ -154,6 +158,7 @@ export const cv: CV = {
     },
     {
       slug: "security-news-scraper",
+      cv: false,
       title: "SecurityNewsScraper",
       summary: "Autonomous threat-intelligence and vulnerability monitoring platform.",
       tech: ["Python", "Flask", "Next.js"],
@@ -161,6 +166,7 @@ export const cv: CV = {
     },
     {
       slug: "yapncap",
+      cv: false,
       title: "YapnCap",
       summary: "CLI that fact-checks YouTube videos and podcasts against real-world data with AI.",
       tech: ["Python"],
@@ -168,6 +174,7 @@ export const cv: CV = {
     },
     {
       slug: "malikboskami",
+      cv: false,
       title: "MalikBOSKami",
       summary:
         "A 32-bit x86 operating system with a user-mode shell, a file system and multitasking (OS course, team).",
@@ -177,6 +184,7 @@ export const cv: CV = {
     },
     {
       slug: "valley",
+      cv: false,
       title: "Valley",
       summary: "A portfolio that looks and plays like Stardew Valley.",
       tech: ["TypeScript", "Phaser"],
@@ -184,6 +192,7 @@ export const cv: CV = {
     },
     {
       slug: "ngebedahkuy",
+      cv: false,
       title: "ngeBEDAHkuy",
       summary: "Co-op Roblox surgery game for 1–4 players.",
       tech: ["Luau", "Blender"],
@@ -193,7 +202,7 @@ export const cv: CV = {
 
   research: [
     {
-      title: "Reverse-Engineering World Coordinates from a Single Screenshot",
+      title: "Implementation of Binary Matrix Operations and the Sliding Window Algorithm for Reverse Engineering Spatial Coordinates in Minecraft Java Edition 1.12.2",
       org: "Discrete Mathematics (IF1220) paper, ITB",
       period: "Jun 2026",
       summary:
@@ -248,14 +257,15 @@ export const cv: CV = {
     {
       title: "Media Intelligence Associate",
       org: "Inkubator IT",
-      period: "Aug 2026 – Present",
-      summary: "Writes copy for Inkubator IT's Instagram content.",
+      period: "Aug 2026 – Oct 2026",
+      summary: "Wrote copy for Inkubator IT's Instagram content.",
     },
     {
       title: "Frontend Developer",
       org: "OSKM ITB 2026",
-      period: "Jul 2026 – Present",
-      summary: "Builds the frontend of the orientation dashboard and the Open House Unit site.",
+      period: "Jul 2026 – Sep 2026",
+      summary:
+        "Built the frontend of the internal dashboard for ITB's annual new-student orientation, used by the committee and mentors. Built the club (UKM) directory of the Open House Unit site: the category pages and the club cards that lead to each club's page.",
     },
     {
       title: "AI Explorer",

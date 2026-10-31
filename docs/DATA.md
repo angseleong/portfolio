@@ -31,7 +31,9 @@ The Story is Full Mode only. **Compact Mode** shows the Summary (§3) as its Abo
 
 ## 3. Summary (CV + Compact Mode About)
 
-> Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation dashboard.
+> Second-year Informatics student at Institut Teknologi Bandung (GPA 3.90/4.00) focused on security and web engineering. I want to become an ethical technologist who builds systems that work, stay secure and can be trusted, while I keep learning and give back to the communities I work with. I bring care and attention to detail to every project, from web apps to security tools. My strength is adapting across technical domains; my growth area is depth, which I work on by setting focused learning goals in cybersecurity.
+
+Adjusted from the profile in the owner's own Tech CV (31 Oct 2026).
 
 ## 4. Stack
 
@@ -44,6 +46,8 @@ The Story is Full Mode only. **Compact Mode** shows the Summary (§3) as its Abo
 Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data science is not a target), Blender, Luau, Phaser, Vite, QEMU, soft skills.
 
 ## 5. Main Projects (Prints, in this order)
+
+On the CV, Project Experience lists only RONDA, lafaz and INTEL. The two OSKM projects are covered by the OSKM role under Organizational Experience (`cv: false`).
 
 ### OSKM ITB 2026 Dashboard
 - Role: Frontend Developer
@@ -75,6 +79,8 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 
 ## 6. More Projects
 
+On the CV only INTEL is listed; the rest are web only (`cv: false`).
+
 | Title | One line | Tech | Link |
 |---|---|---|---|
 | INTEL | Interactive map that estimates when places on Java's north coast fall below high tide, from satellite-measured land subsidence. | React, MapLibre, Python | https://github.com/angseleong/INTEL |
@@ -86,7 +92,7 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 
 ## 7. Research
 
-1. **Reverse-Engineering World Coordinates from a Single Screenshot**
+1. **Implementation of Binary Matrix Operations and the Sliding Window Algorithm for Reverse Engineering Spatial Coordinates in Minecraft Java Edition 1.12.2**
    - Venue: Discrete Mathematics (IF1220) paper, ITB · Jun 2026
    - Summary: Recovers a "hidden" Minecraft base location from one screenshot of the bedrock floor by reversing Java's LCG and matching binary patterns with a sliding window.
    - Links: Paper https://informatika.stei.itb.ac.id/~rinaldi.munir/Matdis/2025-2026/Makalah2026/13525074_Axeleon%20Justin%20A_Implementasi%20Operasi%20Matriks%20Biner%20dan%20Algoritma%20Sliding%20Window%20untuk%20Reverse%20Engineering%20Koordinat%20Spasial%20Minecraft%201.12.pdf · Code https://github.com/angseleong/bedrockfinder · Demo https://youtu.be/qhCnO69BHlY
@@ -99,7 +105,7 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 
 ## 8. Recognition
 
-One section, two groups: **Competitions** (Vortex, HackNusa) and **Certifications** (CyberWarFare Labs, Cisco).
+One section, two groups: **Competitions** (Vortex, HackNusa) and **Certifications** (CyberWarFare Labs, Cisco). The CV titles it **Achievements & Certifications**.
 
 | Title | Issuer | Date | Link | CV |
 |---|---|---|---|---|
@@ -112,8 +118,8 @@ One section, two groups: **Competitions** (Vortex, HackNusa) and **Certification
 
 | Organization | Role | Period | One line |
 |---|---|---|---|
-| Inkubator IT | Media Intelligence Associate | Aug 2026 – Present | Writes copy for Inkubator IT's Instagram content. |
-| OSKM ITB 2026 | Frontend Developer | Jul 2026 – Present | Builds the frontend of the orientation dashboard and the Open House Unit site. |
+| Inkubator IT | Media Intelligence Associate | Aug 2026 – Oct 2026 | Wrote copy for Inkubator IT's Instagram content. |
+| OSKM ITB 2026 | Frontend Developer | Jul 2026 – Sep 2026 | Built the frontend of the internal dashboard for ITB's annual new-student orientation, used by the committee and mentors. Built the club (UKM) directory of the Open House Unit site: the category pages and the club cards that lead to each club's page. |
 | GDGoC ITB | AI Explorer | Jun 2026 – Present | Hands-on AI learning track. |
 | Aku Masuk ITB 2026 | Event Organizer | Dec 2025 – Feb 2026 | Managed the execution and alignment of MoUs with partners. |
 | STEI-K ITB 2025 | Internal Relation Staff | Aug 2025 – Jun 2026 | Handled internal public relations for the cohort. |

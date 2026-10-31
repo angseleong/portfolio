@@ -67,6 +67,12 @@ html.lenis {
   }
 }
 
+/* CV Page (ARCHITECTURE.md §6). */
+@page {
+  size: A4;
+  margin: 12mm 14mm;
+}
+
 :focus-visible {
   outline: 1px solid var(--light);
   outline-offset: 3px;
@@ -76,4 +82,14 @@ body {
   background: var(--ink);
   color: var(--marble);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* After the body rule so it wins: no dark edge around the CV PDF. */
+@media print {
+  html {
+    color-scheme: light;
+  }
+  body {
+    background: #fff;
+  }
 }

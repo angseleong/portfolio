@@ -64,12 +64,13 @@
 
 **Checkpoint:** Scrolling the Hero turns the owner's Bust from front to back, smooth on a phone. ✅ Verified 31 Oct at desktop and 375×812.
 
-## Block 5: CV Page
-- [ ] `/cv` page with print CSS (PRD FR-12), entries with `cv !== false`.
-- [ ] `scripts/cv-pdf.sh` + `npm run cv` → `public/cv.pdf`.
-- [ ] Check the PDF: one A4 page, text selectable, reads cleanly when pasted into a plain text editor.
+## DONE — Block 5: CV Page
+- [x] `/cv` page with print CSS (PRD FR-12), entries with `cv !== false`. The Nav moved from the layout to the home page.
+- [x] Rework: the owner's CV format (Times New Roman, navy headings, dates right, bullets), Projects up to INTEL, Recognition → Achievements & Certifications (ARCHITECTURE.md §6).
+- [x] `scripts/cv-pdf.sh` + `npm run cv` → `public/cv.pdf`.
+- [x] Check the PDF: one A4 page, text selectable, reads cleanly when pasted into a plain text editor.
 
-**Checkpoint:** Download CV gives a one-page PDF that matches `DATA.md`.
+**Checkpoint:** Download CV gives a one-page PDF that matches `DATA.md`. ✅ Verified 31 Oct: one A4 page, pypdf reads every line in order, `/cv.pdf` serves from the Nav, `/cv` has no Nav and no horizontal scroll at 375×812, lint + build clean.
 
 ## Block 6: Polish & Launch
 - [ ] Metadata, Open Graph image (name + Headline on black), favicon.

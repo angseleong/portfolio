@@ -23,8 +23,8 @@ portfolio/
     ├── data/
     │   └── cv.ts           # CV Data: ALL portfolio text, typed (§2)
     ├── app/
-    │   ├── layout.tsx      # Fonts, metadata, Nav
-    │   ├── page.tsx        # Renders <Page />
+    │   ├── layout.tsx      # Fonts, metadata
+    │   ├── page.tsx        # Renders <Nav /> + <Page /> (the CV Page has no Nav)
     │   ├── cv/page.tsx     # CV Page, print CSS
     │   └── globals.css     # Tokens from DESIGN.md §2, base styles
     ├── components/
@@ -63,6 +63,7 @@ type Project = {
   links: Link[];            // empty for private repos
   print?: string;           // the Reel; has print → Main Project
   period?: string;
+  cv?: boolean;             // false = web only, left out of the CV Page
 };
 
 type Entry = {              // Research, Recognition, Volunteering, Education rows
@@ -140,9 +141,14 @@ The first server render is Compact Mode, so there is no flash of 3D for reduced-
 `useGLTF` loads the GLB with the Draco decoder in `public/draco/`.
 
 ## 6. CV Page and PDF
-- `/cv` renders the CV Data with entries where `cv !== false`, using print CSS (`@page { size: A4; margin: 14mm }`).
-- `scripts/cv-pdf.sh` runs `next build && next start`, then:
-  `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --no-pdf-header-footer --print-to-pdf=public/cv.pdf http://localhost:3000/cv`
+- `/cv` renders the CV Data with entries and projects where `cv !== false`, using print CSS (`@page { size: A4; margin: 12mm 14mm }`).
+- Layout follows the owner's own CV (`Tech CV - Axeleon Justin (08:2026).pdf`): Times New Roman, centered uppercase name, navy (`#2e5c8a`) uppercase headings with a rule, bold title with the date on the right, bullets below. Order: Profile, Project Experience, Research, Education, Organizational Experience, Achievements & Certifications, Skills & Tools.
+- ATS: one column, real text, standard headings, URLs printed as text, kerning off (Times kerns "Vo" into "V ortex" when copied). Summaries split into one bullet per sentence. Don't use Geist here: Chrome's PDF of it splits words when copied ("ROND A").
+- Reading order: pypdf (content order, like most ATS parsers) keeps each date next to its title. macOS Preview's copy moves right-aligned dates to the end of a block when the bullets are short; the owner's own CV does the same.
+- The white `@media print` body rule must stay after the dark `body` rule in `globals.css`; otherwise the dark background prints under the CV and shows as a gray box edge.
+- The page is full: 10 pt with line height 1.2. Adding content can push it to two pages: rerun `npm run cv` and check.
+- `scripts/cv-pdf.sh` runs `next build && next start -p 3123` (so it works next to `npm run dev`), then:
+  `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --no-pdf-header-footer --print-to-pdf=public/cv.pdf http://localhost:3123/cv`
 - Exposed as `npm run cv`. The PDF is committed so the site works as a static export.
 
 ## 6b. Capturing Reels from other projects

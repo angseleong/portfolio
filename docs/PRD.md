@@ -84,8 +84,8 @@ The owner is an Informatics student at ITB targeting **security, software engine
 - No 3D, no GSAP, no Lenis are loaded in Compact Mode.
 
 ### FR-12 — CV Page and PDF
-- `/cv`: one A4 page, black on white, one sans-serif font, single column, no icons or images, real text (selectable, ATS-parseable).
-- It uses the CV-only choices in `docs/DATA.md` (Research #1 only, top 4 Volunteering, the short summary).
+- `/cv`: one A4 page in the format of the owner's own CV (Times New Roman, navy headings, dates on the right), single column, no icons or images, real text (selectable, ATS-parseable).
+- It uses the CV-only choices in `docs/DATA.md` (Projects up to INTEL, Research #1 only, top 4 Volunteering, the short summary, Recognition titled "Achievements & Certifications").
 - `npm run cv` writes `public/cv.pdf` from `/cv` with headless Chrome.
 
 ## 5. Non-Functional Requirements
