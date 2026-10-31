@@ -2,15 +2,18 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
-import { Suspense, useMemo, useRef, type RefObject } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import type { Group, Mesh } from "three";
 
 // Phones get the 15k-triangle Bust (ARCHITECTURE.md §5). FullPage is client-only, so matchMedia is safe here.
 const url = window.matchMedia("(max-width: 767px)").matches ? "/models/bust-lite.glb" : "/models/bust.glb";
 const draco = "/draco/";
+// Start the download and Draco decode as soon as this chunk loads, not after the Canvas has measured itself.
+useGLTF.preload(url, draco);
 
-function Bust() {
+function Bust({ onReady }: { onReady: () => void }) {
   const { scene } = useGLTF(url, draco);
+  useEffect(onReady, [onReady]);
   const geometry = useMemo(() => {
     let found: Mesh["geometry"] | undefined;
     scene.traverse((o) => {
@@ -27,25 +30,36 @@ function Bust() {
 }
 
 // ARCHITECTURE.md §4.1: progress is written by the Hero's ScrollTrigger, read here every frame (no React state).
-function Rig({ progress }: { progress: RefObject<number> }) {
+function Rig({ progress, onReady }: { progress: RefObject<number>; onReady: () => void }) {
   const bust = useRef<Group>(null);
-  useFrame(({ camera, size }) => {
+  const spin = useRef(0);
+  useFrame(({ camera, size }, delta) => {
     const p = progress.current ?? 0;
-    if (bust.current) bust.current.rotation.y = p * Math.PI;
-    // Tall phone screens: back the camera off so the shoulders stay inside the width.
-    const fit = Math.max(1, 0.8 / (size.width / size.height));
-    camera.position.z = (6 - p * 2.5) * fit;
+    // A slow idle turn on top of the scroll turn, so the Bust never stops (owner's call, 31 Oct).
+    spin.current += delta * 0.25;
+    if (bust.current) bust.current.rotation.y = p * Math.PI + spin.current;
+    // Close crop: the head near the top edge, the chest cut by the bottom. Tall phone screens back off a little.
+    const fit = Math.max(1, 0.7 / (size.width / size.height));
+    camera.position.z = (2.95 - p * 0.75) * fit;
   });
   return (
-    <group ref={bust}>
-      <Bust />
+    <group ref={bust} position={[0, -0.22, 0]}>
+      <Bust onReady={onReady} />
     </group>
   );
 }
 
 export default function BustScene({ progress }: { progress: RefObject<number> }) {
+  // Fade the Bust in once it has loaded, so it never pops in.
+  const [ready, setReady] = useState(false);
+  const onReady = useCallback(() => setReady(true), []);
   return (
-    <Canvas camera={{ position: [0, 0, 6], fov: 35 }} dpr={[1, 2]} aria-hidden>
+    <Canvas
+      camera={{ position: [0, 0, 6], fov: 35 }}
+      dpr={[1, 2]}
+      aria-hidden
+      style={{ opacity: ready ? 1 : 0, transition: "opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1)" }}
+    >
       <Suspense fallback={null}>
         {/* Metal only shows what it reflects, so the lights are soft panels in a generated environment (no HDR download). */}
         <Environment resolution={256} frames={1}>
@@ -57,7 +71,7 @@ export default function BustScene({ progress }: { progress: RefObject<number> })
           <Lightformer form="rect" intensity={4} color="#DCE6FF" position={[3, 2, -5]} scale={[3, 8, 1]} onUpdate={(l) => l.lookAt(0, 0, 0)} />
           <Lightformer form="rect" intensity={4} color="#DCE6FF" position={[-3, 2, -5]} scale={[3, 8, 1]} onUpdate={(l) => l.lookAt(0, 0, 0)} />
         </Environment>
-        <Rig progress={progress} />
+        <Rig progress={progress} onReady={onReady} />
       </Suspense>
     </Canvas>
   );

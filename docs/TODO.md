@@ -72,6 +72,18 @@
 
 **Checkpoint:** Download CV gives a one-page PDF that matches `DATA.md`. ✅ Verified 31 Oct: one A4 page, pypdf reads every line in order, `/cv.pdf` serves from the Nav, `/cv` has no Nav and no horizontal scroll at 375×812, lint + build clean.
 
+## ACTIVE — Block 5.5: Fixes before launch
+Agreed with the owner in a grilling session, 31 Oct 2026.
+- [x] Stack moves right under the Hero, full-bleed, no title and no Lane labels (labels stay as `aria-label`). Compact Mode keeps its titled list.
+- [x] Hero: the Bust fills ~90% of the height (chest cut by the bottom edge), the name sits behind it, its letters rise in on load and widen as they fade on scroll. Headline in small mono.
+- [x] The Bust keeps a slow idle turn on top of the scroll turn, so it never stops.
+- [x] Story becomes one screen, no pin: Heraclitus epigraph, one statement that Develops word by word, two short lines, and a contact sheet of four photos (`public/about-1..4.jpg`, 3:4, black and white).
+- [x] Stack gap on wide screens fixed (four copies per half). About photos turn to colour on hover or tap.
+- [x] Bust loads earlier (GLB + Draco preloaded with the 3D chunk) and fades in when ready.
+- [ ] Owner: ask the two friends in `about-1.jpg` before launch.
+
+**Checkpoint:** Hero shows the name behind a large turning Bust; the Stack runs edge to edge under it; the About fits one screen with four photos that Develop. ✅ Verified 31 Oct at 1440×900 and 375×812, no horizontal scroll.
+
 ## Block 6: Polish & Launch
 - [ ] Metadata, Open Graph image (name + Headline on black), favicon.
 - [ ] Lighthouse on mobile: Performance ≥ 85, Accessibility ≥ 95.

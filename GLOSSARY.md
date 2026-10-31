@@ -29,7 +29,7 @@ _Avoid_: Tagline, subtitle, bio
 ## Sections
 
 **Story**:
-The About section: four short lines that develop word by word as you scroll.
+The About section in Full Mode: an epigraph, one statement that develops word by word, two short lines and a contact sheet of four photos.
 _Avoid_: About me, bio, intro
 
 **Stack**:

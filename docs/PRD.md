@@ -42,15 +42,15 @@ The owner is an Informatics student at ITB targeting **security, software engine
 
 ### FR-2 — Hero
 - The owner's name, very large, behind the Bust. The Headline under it.
-- The Hero is pinned for about two screens of scroll. Over that scroll the Bust turns ~180° (front → profile → back), the camera moves in, and the name fades out.
+- The Hero is pinned for about two screens of scroll. Over that scroll the Bust turns ~180° (front → profile → back), the camera moves in, and the name widens and fades out. The Bust also keeps a slow idle turn.
 - On phones the scroll is shorter and the Bust uses a lighter model.
 - Until the real Bust exists, a placeholder shape stands in (Block 4).
 
 ### FR-3 — Story
-- Four lines from `docs/DATA.md` §2, one per screen height. Each line Develops word by word as it scrolls into the middle of the screen.
+- One screen from `docs/DATA.md` §2: an epigraph, a statement that Develops word by word, two short lines, and a contact sheet of four photos. No pin.
 
 ### FR-4 — Stack
-- Three Lanes (Languages, Frameworks, Security & Tools), 6 items each, in a Marquee. Neighbouring Lanes run in opposite directions.
+- Right after the Hero, full-bleed, no title. Three Lanes (Languages, Frameworks, Security & Tools), 6 items each, in a Marquee. Neighbouring Lanes run in opposite directions.
 - Each item: monochrome logo + label. Hover: the Lane pauses, the item's logo and label turn white.
 - No skill levels, bars or percentages.
 

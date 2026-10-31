@@ -20,12 +20,13 @@ Items marked **⚠ confirm** are assumptions the owner has not confirmed yet.
 
 ## 2. Story (web)
 
-Built only from the owner's own answers (why security, what keeps them building, life outside code):
+Rewritten with the owner, 31 Oct 2026 (built from their own answers and the Minecraft paper in §7):
 
-1. Every leap forward leaves something exposed.
-2. Security is the price of progress, and I want to be the one who pays it carefully.
-3. I don't stay up for the code. I stay up because what I ship might help a lot of people.
-4. When I'm not building, I'm telling stories, or learning something new.
+- Epigraph: "Nature loves to hide." — Heraclitus
+- Statement: Every leap forward leaves something exposed. I want to be the one who finds it first.
+- Line: I once found a hidden Minecraft base from a single screenshot of bedrock. Systems are like that: they always show more than they mean to.
+- Line: I don't stay up for the code. I stay up because what I ship might reach a lot of people. The rest of the time, I'm out talking with them.
+- Photos (contact sheet, in order): talking a problem through with two friends over a laptop; holding an ITB Informatics student flag; thumbs up at the Faculty of Medicine sign; this portfolio's code on the owner's monitor. Files `public/about-1..4.jpg`.
 
 The Story is Full Mode only. **Compact Mode** shows the Summary (§3) as its About instead.
 

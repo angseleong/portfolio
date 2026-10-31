@@ -9,8 +9,8 @@
 | Visitor scrolls through | What happens |
 |---|---|
 | Hero (~2 screens) | The Bust turns from front to back, the camera moves in, the name fades. |
-| Story (4 screens) | Each line Develops word by word as it reaches the middle. |
-| Stack | Three Lanes slide sideways. Hovering pauses a Lane and lights the item white. |
+| Stack | Right under the Hero, edge to edge. Three Lanes slide sideways. Hovering pauses a Lane and lights the item white. |
+| Story (1 screen) | The statement Develops word by word; the four photos Develop one after another. |
 | Darkroom (desktop) | The page holds still; scrolling slides the Line so each Print passes by. Prints Sway; the cursor gives them Wind; each Print Develops once. |
 | Darkroom (phone) | Swipe the Line sideways; it snaps to each Print. |
 | More Projects | One collapsed row under the Main Projects. Tap to open the list, tap again to close. |

@@ -78,7 +78,7 @@ type Entry = {              // Research, Recognition, Volunteering, Education ro
 export const cv: {
   name: string; fullName: string; headline: string;
   email: string; location: string; links: Link[];
-  story: string[];          // the four Story lines (web)
+  story: { epigraph: { text: string; by: string }; statement: string; lines: string[]; photos: { src: string; alt: string }[] };  // the Story (web)
   summary: string;          // the short CV summary
   closing: string;          // the Contact closing line
   stack: { lane: string; items: { name: string; icon?: string }[] }[];
@@ -110,7 +110,7 @@ The first server render is Compact Mode, so there is no flash of 3D for reduced-
 
 ### 4.1 Hero
 - One ScrollTrigger: `pin: true`, `end: "+=200%"` (phone `+=120%`), `scrub: true`.
-- Its progress (0–1) is written to a ref. `BustScene`'s `useFrame` reads the ref each frame and sets `bust.rotation.y = progress * Math.PI` and `camera.position.z = 6 - progress * 2.5`. No React state per frame.
+- Its progress (0–1) is written to a ref. `BustScene`'s `useFrame` reads the ref each frame and sets `bust.rotation.y = progress * Math.PI + spin` (spin grows by 0.25 rad/s, the idle turn) and `camera.position.z = 2.95 - progress * 0.75`. No React state per frame.
 - The name's opacity is a GSAP tween on the same trigger.
 
 ### 4.2 Darkroom

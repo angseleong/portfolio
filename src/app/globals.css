@@ -51,6 +51,20 @@
   filter: none;
 }
 
+/* About photos: Develop once like a Print, rest in black and white, colour on hover or tap (DESIGN.md §8). */
+.about-photo {
+  filter: grayscale(1) brightness(1.8) contrast(0.3);
+  transition: filter 1s ease-out;
+}
+[data-developed] .about-photo {
+  filter: grayscale(1) brightness(0.88);
+}
+[data-developed] .about-photo:hover,
+[data-developed] .about-photo[data-color] {
+  filter: none;
+  transition-duration: 0.5s;
+}
+
 html {
   color-scheme: dark;
   scroll-behavior: smooth;

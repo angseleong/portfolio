@@ -37,9 +37,9 @@ export default function FullPage() {
   return (
     <main ref={root} id="top" className="w-full pb-32">
       <Hero />
+      <Stack />
       <div className={column}>
         <Story />
-        <Stack />
       </div>
 
       {/* Full width: the Darkroom has its own light and pins the whole screen. */}

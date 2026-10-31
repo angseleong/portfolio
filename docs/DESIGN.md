@@ -30,9 +30,9 @@ Rules: no hues at all, only warm greys and white. White is a state (hover, activ
 
 | Role | Size (desktop / phone) |
 |---|---|
-| Hero name | `clamp(64px, 14vw, 200px)`, tracking −0.02em |
+| Hero name | `clamp(56px, 15vw, 240px)`, tracking −0.02em, one line, behind the Bust |
 | Section title | 48 / 32 px |
-| Story line | 40 / 26 px, Instrument Serif |
+| Story statement | 40 / 26 px, Instrument Serif |
 | Body | 17 / 16 px, line-height 1.6 |
 | Label | 12 px mono, tracking 0.08em, lowercase (dates, sub-group labels, tech) |
 
@@ -48,7 +48,11 @@ Rules: no hues at all, only warm greys and white. White is a state (hover, activ
 - Material (owner's call, 31 Oct: polished metal mosaic instead of marble): a low-poly Bust (~6k flat facets) in `MeshStandardMaterial` with `flatShading`, color `--marble`, `metalness` 1, `roughness` ~0.18, no texture. Every facet catches the light like a small mirror.
 - Light: metal only shows what it reflects, so the light is a generated environment (drei `Environment` + `Lightformer`, no HDR download): a warm key panel from top-left, a soft fill from the right, and two faint cool-white rim panels behind so the silhouette reads on black.
 - Background is the page black; no floor, no shadow plane.
-- Hero scroll (pinned ~200 vh desktop, ~120 vh phone): rotation Y 0 → π, camera z 6 → 3.5, name opacity 1 → 0. Scrubbed, eased with `power1.inOut`.
+- Framing: a close crop. The Bust fills ~90% of the height, head near the top edge, chest cut by the bottom (camera z 2.95, Bust lowered 0.22). Tall phone screens back off so the whole Bust shows.
+- The name sits behind the Bust (the canvas is transparent), so the head covers part of it. Its letters rise in on load (stagger 40 ms, `expo.out`). The Headline is small mono at the bottom left.
+- Hero scroll (pinned ~200 vh desktop, ~120 vh phone): rotation Y +π, camera z 2.95 → 2.2, name letter-spacing → 0.1em and opacity 1 → 0. Scrubbed, eased with `power1.inOut`.
+- Load: the GLB and Draco decoder are preloaded as soon as the 3D chunk arrives, and the canvas fades in (1.2 s) once the Bust is ready, so it never pops in.
+- Idle turn: the Bust also turns slowly on its own (0.25 rad/s) and never stops, even after the Hero scrolls away.
 
 ## 6. The Darkroom
 - The section goes darker than the page (`#070605`) lit by an enlarger: a soft radial glow of white from the top, ~7% opacity, falling off to black at the edges. That is the only gradient on the site.
@@ -63,15 +67,15 @@ Rules: no hues at all, only warm greys and white. White is a state (hover, activ
 - Screenshots are shown as they are: no grain, no tint.
 
 ## 7. Stack Marquee
-- Three Lanes stacked, 56 px tall each, hairline above and below.
-- Lane speeds 32 s / 38 s / 34 s per loop; Lane 2 runs the opposite way.
+- Right under the Hero, full-bleed (edge to edge), no section title and no Lane labels. Three Lanes stacked, 56 px tall each, hairline above and below.
+- Lane speeds 64 s / 76 s / 68 s per loop; Lane 2 runs the opposite way. Each half of a Lane holds four copies of its items so it stays wider than a 2560 px screen (no gap).
 - Item: 18 px monochrome logo in `--stone` + label in Geist. Hover: Lane pauses, logo and label turn `--light`.
 - Logos are Simple Icons SVGs (CC0) copied into `public/icons/`. An item with no logo shows the label only.
 
 ## 8. Motion
 - Slow and smooth: default 600–900 ms, `cubic-bezier(0.22, 1, 0.36, 1)`.
 - Section content appears with opacity 0 → 1 and translateY 8 px → 0, once.
-- Story: each word scrubs from `--marble` at 15% to 100% as the line crosses the middle of the screen.
+- Story: one screen, no pin. The statement's words scrub from 15% to 100% while the section crosses the screen. The four photos (2×2 contact sheet, right on desktop, above the text on phones, mono frame numbers) Develop once like a Print, 250 ms apart, then rest in black and white. Hover (or a tap on phones) shows a photo in colour. The files are colour; CSS does the grey.
 - `prefers-reduced-motion: reduce` → Compact Mode (no animation at all).
 
 ## 9. Do / Don't

@@ -36,7 +36,13 @@ export type CV = {
   email: string;
   location: string;
   links: Link[];
-  story: string[];
+  /** The About in Full Mode (DATA.md §2). Compact Mode and the CV use `summary`. */
+  story: {
+    epigraph: { text: string; by: string };
+    statement: string;
+    lines: string[];
+    photos: { src: string; alt: string }[];
+  };
   summary: string;
   closing: string;
   stack: StackLane[];
@@ -61,12 +67,20 @@ export const cv: CV = {
     { label: "GitHub", href: "https://github.com/angseleong" },
   ],
 
-  story: [
-    "Every leap forward leaves something exposed.",
-    "Security is the price of progress, and I want to be the one who pays it carefully.",
-    "I don't stay up for the code. I stay up because what I ship might help a lot of people.",
-    "When I'm not building, I'm telling stories, or learning something new.",
-  ],
+  story: {
+    epigraph: { text: "Nature loves to hide.", by: "Heraclitus" },
+    statement: "Every leap forward leaves something exposed. I want to be the one who finds it first.",
+    lines: [
+      "I once found a hidden Minecraft base from a single screenshot of bedrock. Systems are like that: they always show more than they mean to.",
+      "I don't stay up for the code. I stay up because what I ship might reach a lot of people. The rest of the time, I'm out talking with them.",
+    ],
+    photos: [
+      { src: "/about-1.jpg", alt: "Talking through a problem with two friends over a laptop." },
+      { src: "/about-2.jpg", alt: "Holding an ITB Informatics student flag, a mountain behind." },
+      { src: "/about-3.jpg", alt: "Thumbs up in front of the Faculty of Medicine sign." },
+      { src: "/about-4.jpg", alt: "This portfolio's code on my monitor." },
+    ],
+  },
   summary:
     "Second-year Informatics student at Institut Teknologi Bandung (GPA 3.90/4.00) focused on security and web engineering. I want to become an ethical technologist who builds systems that work, stay secure and can be trusted, while I keep learning and give back to the communities I work with. I bring care and attention to detail to every project, from web apps to security tools. My strength is adapting across technical domains; my growth area is depth, which I work on by setting focused learning goals in cybersecurity.",
   closing: "Let's build something safe.",
