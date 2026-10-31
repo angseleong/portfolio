@@ -78,7 +78,7 @@ export const cv: CV = {
     photos: [
       { src: "/about-1.jpg", alt: "Talking through a problem with two friends over a laptop." },
       { src: "/about-2.jpg", alt: "Holding an ITB Informatics student flag, a mountain behind." },
-      { src: "/about-3.jpg", alt: "Thumbs up in front of the Faculty of Medicine sign." },
+      { src: "/about-3.jpg", alt: "Holding a flag on the steps under the yellow banners of HMIF ITB." },
       { src: "/about-4.jpg", alt: "This portfolio's code on my monitor." },
     ],
   },
