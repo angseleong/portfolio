@@ -55,10 +55,12 @@ The owner is an Informatics student at ITB targeting **security, software engine
 - No skill levels, bars or percentages.
 
 ### FR-5 — Darkroom (Projects)
-- The three Main Projects hang as Prints on one Line under the white light of an enlarger.
+- The four Main Projects (OSKM Dashboard, OSKM Open House Unit, RONDA, lafaz) hang as Prints on one Line under the white light of an enlarger.
 - Prints Sway out of phase. The cursor passing near a Print gives it Wind.
 - Each Print Develops the first time it enters the screen (~1 s), then stays a plain screenshot.
-- Tap or click Flips a Print to its Back: title, role, summary, tech, links. Tapping again flips it back. Only one Print is flipped at a time.
+- All Prints are horizontal and the same size: a 16:10 window on paper with the title under it. Behind the window is a tall Reel (pitch deck slides, dashboard pages or app screens) that pans down on hover.
+- On desktop a Print can be dragged; the Line stretches with it and springs back on release.
+- Tap or click Opens a Print: the paper grows downward with role, summary, tech and links, and the Reel pans. Click again or Esc to close.
 - Desktop: the Darkroom is pinned and vertical scroll slides the Line sideways. Phone: the Line is a horizontal swipe with snap, not pinned.
 - **More Projects** follows as one collapsed row ("More projects" + count) that continues the list above it. Tapping it opens the plain list: title, one line, tech, link. Closed by default, in both modes.
 

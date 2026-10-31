@@ -10,7 +10,7 @@ export type Project = {
   summary: string;
   tech: string[];
   links: Link[];
-  /** A Project with a print is a Main Project. */
+  /** A Project with a print is a Main Project. A tall Reel image that pans inside a 16:10 frame. */
   print?: string;
   period?: string;
 };
@@ -66,7 +66,7 @@ export const cv: CV = {
     "When I'm not building, I'm telling stories, or learning something new.",
   ],
   summary:
-    "Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation website.",
+    "Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation dashboard.",
   closing: "Let's build something safe.",
 
   stack: [
@@ -108,13 +108,23 @@ export const cv: CV = {
   projects: [
     {
       slug: "oskm",
-      title: "OSKM ITB 2026 Website",
+      title: "OSKM ITB 2026 Dashboard",
       role: "Frontend Developer",
       summary:
-        "Frontend developer for the official website of OSKM ITB 2026, ITB's annual new-student orientation.",
+        "Frontend developer for the internal dashboard of OSKM ITB 2026, ITB's annual new-student orientation, used by the committee and mentors.",
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui"],
       links: [],
-      print: "/prints/oskm.png",
+      print: "/prints/oskm.jpg",
+    },
+    {
+      slug: "ohu",
+      title: "OSKM Open House Unit",
+      role: "Frontend Developer",
+      summary:
+        "Open house website where new ITB students found student clubs, the stage rundown and an interactive venue map. On the frontend team I built the club (UKM) directory: the category pages and the club cards that lead to each club's page.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+      links: [],
+      print: "/prints/ohu.jpg",
     },
     {
       slug: "ronda",
@@ -123,7 +133,7 @@ export const cv: CV = {
         "An Android app that catches scam APKs the moment they're installed and alerts a trusted guardian, who can uninstall or whitelist them remotely. Top 30, HackNusa 2026.",
       tech: ["Kotlin", "Jetpack Compose", "Firebase"],
       links: [gh("angseleong/RONDA")],
-      print: "/prints/ronda.png",
+      print: "/prints/ronda.jpg",
     },
     {
       slug: "lafaz",
@@ -132,7 +142,7 @@ export const cv: CV = {
         "A web app for learning to read the Qur'an by voice. Speech recognition (Whisper) runs entirely in the browser, so recordings never leave the device. Built with a friend, in development.",
       tech: ["Next.js", "TypeScript", "Transformers.js"],
       links: [gh("adnankurniawann/lafaz")],
-      print: "/prints/lafaz.png",
+      print: "/prints/lafaz.jpg",
     },
     {
       slug: "intel",
@@ -245,7 +255,7 @@ export const cv: CV = {
       title: "Frontend Developer",
       org: "OSKM ITB 2026",
       period: "Jul 2026 – Present",
-      summary: "Builds the frontend of the orientation website.",
+      summary: "Builds the frontend of the orientation dashboard and the Open House Unit site.",
     },
     {
       title: "AI Explorer",

@@ -11,7 +11,7 @@
 **Owner does (by hand):**
 - [x] Confirm the old Apple-style code in this folder can be deleted. Deleted 30 Oct 2026.
 - [ ] Import `angseleong/portfolio` on vercel.com (Add New → Project, framework preset Next.js, no env vars). The agent can't log in for you.
-- [ ] Take plain screenshots of OSKM, RONDA and lafaz → `public/prints/`.
+- [x] Screenshots of OSKM, RONDA and lafaz → `public/prints/` (taken from Valley and lafaz).
 - [ ] Confirm the two **⚠ confirm** items in `docs/DATA.md`.
 
 **Agent does:**
@@ -41,24 +41,28 @@
 
 ---
 
-## Block 3: Darkroom
-- [ ] Line, Clips, three Prints from `projects` with `print`.
-- [ ] Sway (CSS), Wind (pointer, desktop), Develop (IntersectionObserver).
-- [ ] Flip to the Back, one at a time, keyboard + Esc.
-- [ ] Desktop pin with horizontal scroll; phone swipe with snap.
-- [ ] Enlarger light (soft white glow from the top) and darker section background.
+## DONE — Block 3: Darkroom
+- [x] Line, Clips, three Prints from `projects` with `print`. Prints: OSKM login + RONDA "protected" screens from Valley, lafaz Alif lesson captured from its dev server at 375×812 (`public/prints/*.jpg`).
+- [x] Sway (CSS), Wind (pointer, `pointer: fine` only), Develop (IntersectionObserver).
+- [x] Flip to the Back, one at a time, keyboard + Esc.
+- [x] Desktop pin with horizontal scroll; phone swipe with snap.
+- [x] Enlarger light (soft white glow from the top) and darker section background.
 
-**Checkpoint:** On desktop the Line slides with scroll and every Print flips. On a phone the Line swipes and snaps, and every Print flips with a tap.
+- [x] Rework after review (ADR-0009): slack Line you can pull, uniform polaroid Prints with logos for RONDA and lafaz, Lift instead of Flip.
+- [x] OSKM Open House Unit added as a fourth Main Project (Reel from seven Valley screenshots). Reels cropped to 776 px per page so the Next.js dev badge never shows.
+- [x] Second rework (ADR-0010): horizontal Prints with panning Reels (RONDA pitch deck, OSKM dashboard pages, lafaz showcase) that Open downward; Lift removed.
 
-## Block 4: Bust
-- [ ] Hero with a placeholder shape (marble material, lights from DESIGN.md §5) and the pinned scroll (ARCHITECTURE.md §4.1).
-- [ ] Check Rodin Gen-2.5's data terms; report to the owner before any upload.
-- [ ] Owner provides four photos; generate the raw mesh.
-- [ ] `scripts/bust/finish.py` → `bust.glb` (≤ 3 MB) + `bust-lite.glb` (≤ 1 MB).
-- [ ] Owner approves the likeness. If not: optional hand sculpting, or FaceBuilder (ADR-0006).
-- [ ] Swap the placeholder for the real Bust; phones load `bust-lite.glb`.
+**Checkpoint:** On desktop the Line slides with scroll and every Print opens. On a phone the Line swipes and snaps, and every Print opens with a tap. ✅ Verified 30 Oct: pin + horizontal slide on desktop, Open + Esc (paper 320 → 477 px, Line stays put, Reel pans), Drag pulls the Line and springs back, Wind (6° then eases back), all three Prints Develop, phone swipe with snap and no pin, no horizontal page scroll, lint + build clean.
 
-**Checkpoint:** Scrolling the Hero turns the owner's Bust from front to back, smooth on a phone.
+## DONE — Block 4: Bust
+- [x] Hero with a placeholder shape (marble material, lights from DESIGN.md §5) and the pinned scroll (ARCHITECTURE.md §4.1). ✅ 31 Oct: pin + turn + name fade at desktop and 375×812, no horizontal scroll, lint + build clean. `Hero.tsx`, `BustScene.tsx`.
+- [x] Check Rodin Gen-2.5's data terms; report to the owner before any upload. ✅ 31 Oct: reported in chat, waiting on the owner's decision.
+- [x] Owner provides four photos; generate the raw mesh. ✅ 31 Oct: owner generated it on Rodin Gen-2.5.
+- [x] `scripts/bust/finish.py` → `bust.glb` (≤ 3 MB) + `bust-lite.glb` (≤ 1 MB). ✅ 31 Oct: scan head on Poly Haven's Marble Bust 01 body, fused into a polished metal mosaic (ADR-0011): 96 KB + 52 KB.
+- [x] Owner approves the likeness. If not: optional hand sculpting, or FaceBuilder (ADR-0006). ✅ 31 Oct: approved (metal mosaic).
+- [x] Swap the placeholder for the real Bust; phones load `bust-lite.glb`. ✅ 31 Oct: desktop and 375×812 (camera backs off on tall screens), lite loads on phones, no horizontal scroll, lint + build clean.
+
+**Checkpoint:** Scrolling the Hero turns the owner's Bust from front to back, smooth on a phone. ✅ Verified 31 Oct at desktop and 375×812.
 
 ## Block 5: CV Page
 - [ ] `/cv` page with print CSS (PRD FR-12), entries with `cv !== false`.

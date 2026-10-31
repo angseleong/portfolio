@@ -9,9 +9,13 @@ portfolio/
 │   ├── models/
 │   │   ├── bust.glb        # Full Bust, Draco, ≤ 3 MB
 │   │   └── bust-lite.glb   # Phone Bust, Draco, ≤ 1 MB
-│   ├── prints/             # One screenshot per Main Project (oskm.png, ronda.png, lafaz.png)
+│   ├── prints/             # One Reel per Main Project: oskm.jpg, ronda.jpg, lafaz.jpg (tall images)
 │   └── icons/              # Simple Icons SVGs for the Stack
 ├── scripts/
+│   ├── prints/
+│   │   ├── stack.py        # Stack images at one width into a Reel (needs Pillow)
+│   │   ├── lafaz_reel.py   # lafaz showcase Reel: Pelita + six phone screens
+│   │   └── fullpage.mjs    # Full-page screenshot of a running site (headless Chrome over CDP, no deps)
 │   ├── cv-pdf.sh           # Headless Chrome: /cv → public/cv.pdf
 │   └── bust/
 │       └── finish.py       # Blender script: raw mesh → bust.glb + bust-lite.glb (§5)
@@ -33,8 +37,8 @@ portfolio/
     │   │   ├── BustScene.tsx   # R3F <Canvas>, lights, GLB, useFrame reads progress
     │   │   ├── Story.tsx
     │   │   ├── Stack.tsx       # Three Lanes, CSS Marquee
-    │   │   ├── Darkroom.tsx    # Pin + horizontal Line, Wind, Develop observer
-    │   │   └── Print.tsx       # Front/Back, Sway, Flip
+    │   │   ├── Darkroom.tsx    # Pin + horizontal slide, slack Line, Drag, Wind, Develop
+    │   │   └── Print.tsx       # The hanging Print: Reel window, title, notes that Open downward
     │   ├── CompactPage.tsx # Every section as a plain column
     │   └── lists.tsx       # Shared list rows: MoreProjects, Research, Recognition, Volunteering, Education, Contact
     └── lib/
@@ -57,7 +61,7 @@ type Project = {
   summary: string;          // one or two sentences
   tech: string[];
   links: Link[];            // empty for private repos
-  print?: string;           // /prints/x.png → this is a Main Project
+  print?: string;           // the Reel; has print → Main Project
   period?: string;
 };
 
@@ -113,28 +117,37 @@ The first server render is Compact Mode, so there is no flash of 3D for reduced-
 - Phone: no pin. The Line is `overflow-x: auto` with `scroll-snap-type: x mandatory`.
 - **Sway** is a CSS keyframe on the Print. **Wind** adds a second rotation on a wrapper element, so the two never fight: a `pointermove` handler on the Darkroom finds Prints within 200 px and sets a CSS variable `--wind` that eases back to 0.
 - **Develop**: an `IntersectionObserver` adds `.developed` once; CSS does the rest.
-- **Flip**: the Print is a `<button aria-pressed>`; state lives in `Darkroom` (one flipped index or none).
+- **Line**: an SVG `<path>` redrawn on `gsap.ticker` through the top-center of every `[data-drag]` wrapper, with a quadratic sag between points.
+- **Drag**: `Draggable` (from the `gsap` package) on each `[data-drag]`, fine pointers only, `dragClickables: true`; release tweens back to 0,0. Draggable swallows the click that ends a drag, so a plain click still Opens.
+- **Reel pan**: CSS only. The window is a size container (`container-type: size`); the image translates to `calc(-100% + 100cqh)` on hover or `[data-open]`. Its duration comes from a `--pan` variable set on image load from its aspect ratio.
+- **Open**: one open index in `Darkroom`; the notes use a `grid-template-rows: 0fr → 1fr` transition. Esc closes. The section is laid out from the top (not centered) so an opening Print grows downward without moving the Line.
 
 ## 5. Bust Pipeline (see ADR-0006)
 
 1. Owner takes 4 photos: front, 3/4 left, 3/4 right, profile. Neutral face, even light, hair off the forehead.
 2. Check the image-to-3D service's data terms before upload (Rodin Gen-2.5 first). Generate a mesh, download GLB/OBJ.
-3. `blender -b -P scripts/bust/finish.py -- raw.glb`:
-   - cut below the shoulders into a bust shape, close the hole;
-   - voxel remesh + smooth to remove scan noise;
-   - strip textures, apply the marble material from DESIGN.md §5 (the real look is set in R3F, Blender only sets a neutral base);
-   - decimate to ~60k tris (`bust.glb`) and ~15k tris (`bust-lite.glb`);
-   - export glTF with Draco compression.
+3. `/Applications/Blender.app/Contents/MacOS/Blender -b -P scripts/bust/finish.py -- scripts/bust/src/raw.glb scripts/bust/src/template/marble_bust_01_1k.gltf public/models`
+   (`scripts/bust/src/` is git-ignored: the owner's scan and the downloaded template):
+   - keep only the scan's head (cut under the chin, cap the opening);
+   - the neck, shoulders, chest and plinth come from Poly Haven's Marble Bust 01 (CC0, Rico Cilliers): turned so the chest faces front and its head cut off. The scan's head is scaled to the template's head height, set on the neck and turned 35° the way the neck was carved; the top of the neck is widened to the outline of the head's cut so hair runs into neck;
+   - mosaic (owner's call): fuse both with a coarse voxel remesh (0.02, which also hides the joint and turns the scan's hair sheets into solid locks), then decimate to flat facets: ~6k tris (`bust.glb`) and ~3k (`bust-lite.glb`). A fine remesh or skin smoothing ruined the hair and eyes, so neither is done;
+   - strip textures; the metal material from DESIGN.md §5 is set in R3F, not in the file;
+   - export glTF with Draco compression; `scripts/bust/src/preview.blend` keeps the Bust for looking at in Blender.
+   - `public/draco/` holds the Draco decoder (copied from `three`) so no CDN is used.
 4. Facial detail that the generator smoothed out is fixed by hand in Blender's Sculpt Mode if the owner wants it (1–3 hours). Not scripted.
 5. Fallback if the likeness is poor: KeenTools FaceBuilder (one month), then the same script.
 
-`useGLTF` loads the GLB with drei's default Draco decoder.
+`useGLTF` loads the GLB with the Draco decoder in `public/draco/`.
 
 ## 6. CV Page and PDF
 - `/cv` renders the CV Data with entries where `cv !== false`, using print CSS (`@page { size: A4; margin: 14mm }`).
 - `scripts/cv-pdf.sh` runs `next build && next start`, then:
   `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --no-pdf-header-footer --print-to-pdf=public/cv.pdf http://localhost:3000/cv`
 - Exposed as `npm run cv`. The PDF is committed so the site works as a static export.
+
+## 6b. Capturing Reels from other projects
+- `node scripts/prints/fullpage.mjs <url> <out.png> [width] [waitMs]` scrolls the page once (so reveal animations run), hides the Next.js dev badge and captures the full document height.
+- The owner's `~/Documents` is synced to iCloud with storage optimisation, so older projects can have **dataless `node_modules`** (placeholders that never finish downloading). Symptom: `next dev` or even `next --version` hangs with no output. Check with `find node_modules -flags +dataless | wc -l`; fix by copying the project (without `node_modules`, `.next`, `.git`) to a temp folder and running `pnpm install` there.
 
 ## 7. Deploy
 - Vercel, Git integration on `main`, default `*.vercel.app` domain.

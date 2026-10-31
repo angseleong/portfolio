@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Bust sources: the owner's face scan and the downloaded template (scripts/bust/finish.py)
+scripts/bust/src/

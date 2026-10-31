@@ -49,16 +49,12 @@ The Projects section: a dark room lit from above by an enlarger's white light, w
 _Avoid_: Red room, gallery, projects carousel
 
 **Line**:
-The string the Prints hang from, with a Clip per Print.
+The slack string the Prints hang from, with a Clip per Print. It sags between Clips and stretches when a Print is dragged.
 _Avoid_: Rope, wire, clothesline
 
 **Print**:
-One Main Project shown as a photo print on the Line. Its front is a screenshot, its Back is the notes.
+One Main Project shown as a horizontal photo print on the Line: a 16:10 window onto its Reel, the title under it, and notes that Open downward.
 _Avoid_: Card, photo card, tile, polaroid
-
-**Back**:
-The reverse side of a Print, shown after a Flip: title, one-line role, summary, tech, links.
-_Avoid_: Details panel, modal, overlay
 
 **Sway**:
 The slow side-to-side swing of a Print around its Clip.
@@ -72,12 +68,16 @@ _Avoid_: Hover physics, repel
 The first appearance of a Print or a Story word: from faint to full, like paper in a developer tray.
 _Avoid_: Fade in, reveal
 
-**Flip**:
-Turning a Print over to show its Back, and back again.
-_Avoid_: Open, expand, click card
+**Reel**:
+The tall image behind a Print's 16:10 window (stacked slides, pages or screens). It pans down on hover and while the Print is Open.
+_Avoid_: Slideshow, video, carousel, long screenshot
+
+**Open**:
+A Print's paper growing downward to show its notes: role, summary, tech, links.
+_Avoid_: Expand, flip, lift, modal
 
 **Main Project**:
-A project that hangs as a Print: OSKM ITB 2026 Website, RONDA, lafaz.
+A project that hangs as a Print: OSKM ITB 2026 Dashboard, OSKM Open House Unit, RONDA, lafaz.
 _Avoid_: Featured project, hero project
 
 **More Projects**:

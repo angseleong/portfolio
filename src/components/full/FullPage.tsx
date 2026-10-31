@@ -4,9 +4,13 @@ import "lenis/dist/lenis.css";
 import { useEffect, useRef } from "react";
 import { cv } from "@/data/cv";
 import { gsap, ScrollTrigger, startScroll } from "@/lib/scroll";
-import { Contact, EntryList, Intro, MoreProjects, ProjectList, Recognition, Section, mainProjects } from "../lists";
+import { Contact, EntryList, MoreProjects, Recognition, Section } from "../lists";
+import { Darkroom } from "./Darkroom";
+import { Hero } from "./Hero";
 import { Stack } from "./Stack";
 import { Story } from "./Story";
+
+const column = "mx-auto w-full max-w-[1080px] px-4 sm:px-8";
 
 export default function FullPage() {
   const root = useRef<HTMLElement>(null);
@@ -31,32 +35,39 @@ export default function FullPage() {
   }, []);
 
   return (
-    <main ref={root} id="top" className="mx-auto w-full max-w-[1080px] px-4 pb-32 pt-14 sm:px-8">
-      <Intro />
-      <Story />
-      <Stack />
+    <main ref={root} id="top" className="w-full pb-32">
+      <Hero />
+      <div className={column}>
+        <Story />
+        <Stack />
+      </div>
 
-      {/* Block 3 replaces the Main Projects list with the Darkroom. */}
-      <Section id="projects" title="Projects">
-        <ProjectList projects={mainProjects} />
-        <MoreProjects />
-      </Section>
+      {/* Full width: the Darkroom has its own light and pins the whole screen. */}
+      <div className="mt-24 sm:mt-40">
+        <Darkroom />
+      </div>
 
-      <Section id="research" title="Research">
-        <EntryList entries={cv.research} />
-      </Section>
+      <div className={column}>
+        <div className="mt-12 border-t border-line">
+          <MoreProjects />
+        </div>
 
-      <Recognition />
+        <Section id="research" title="Research">
+          <EntryList entries={cv.research} />
+        </Section>
 
-      <Section title="Volunteering">
-        <EntryList entries={cv.volunteering} />
-      </Section>
+        <Recognition />
 
-      <Section title="Education">
-        <EntryList entries={cv.education} />
-      </Section>
+        <Section title="Volunteering">
+          <EntryList entries={cv.volunteering} />
+        </Section>
 
-      <Contact />
+        <Section title="Education">
+          <EntryList entries={cv.education} />
+        </Section>
+
+        <Contact />
+      </div>
     </main>
   );
 }

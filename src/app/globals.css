@@ -29,6 +29,26 @@
       transform: translateX(-50%);
     }
   }
+
+  --animate-sway: sway 4.2s ease-in-out infinite alternate;
+
+  @keyframes sway {
+    from {
+      rotate: -3deg;
+    }
+    to {
+      rotate: 3deg;
+    }
+  }
+}
+
+/* Darkroom Print: Develop once (DESIGN.md §6). */
+.print-photo {
+  filter: brightness(1.8) contrast(0.3);
+  transition: filter 1s ease-out;
+}
+[data-developed] .print-photo {
+  filter: none;
 }
 
 html {

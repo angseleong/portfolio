@@ -1,21 +1,22 @@
 import gsap from "gsap";
+import { Draggable } from "gsap/Draggable";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Draggable);
 
-export { gsap, ScrollTrigger };
+export { Draggable, gsap, ScrollTrigger };
 
 /** Lenis smooth scroll driving ScrollTrigger (ARCHITECTURE.md §4). Returns a cleanup. */
 export function startScroll() {
   // Nav is 56 px tall; land anchors just below it.
-  const lenis = new Lenis({ anchors: { offset: -72 } });
-  lenis.on("scroll", ScrollTrigger.update);
-  const tick = (time: number) => lenis.raf(time * 1000);
+  const smooth = new Lenis({ anchors: { offset: -72 } });
+  smooth.on("scroll", ScrollTrigger.update);
+  const tick = (time: number) => smooth.raf(time * 1000);
   gsap.ticker.add(tick);
   gsap.ticker.lagSmoothing(0);
   return () => {
     gsap.ticker.remove(tick);
-    lenis.destroy();
+    smooth.destroy();
   };
 }

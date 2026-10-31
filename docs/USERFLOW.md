@@ -18,9 +18,10 @@
 | Contact | Closing line, email, LinkedIn, GitHub, Download CV. |
 
 ## 3. Reading a Main Project
-1. Tap or click a Print (or focus it and press Enter/Space).
-2. It Flips to its Back: title, role, summary, tech, links.
-3. Tap it again, tap another Print, or press Esc: it flips back.
+1. Hover a Print: its Reel pans down through the whole image.
+2. Tap or click it (or focus it and press Enter/Space): the paper grows downward with role, summary, tech and links, and the Reel keeps panning.
+3. Click it again or press Esc: it closes.
+4. On desktop, drag a Print to pull the Line; let go and it springs back.
 
 ## 4. Switching Modes
 - The Full / Compact toggle in the Nav switches at once and is remembered on the next visit.

@@ -31,7 +31,7 @@ The Story is Full Mode only. **Compact Mode** shows the Summary (§3) as its Abo
 
 ## 3. Summary (CV + Compact Mode About)
 
-> Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation website.
+> Informatics student at ITB (GPA 3.90/4.00) focused on security and web engineering. Builds software for real users, from an Android app that flags scam APKs to a trusted guardian, to the OSKM ITB 2026 orientation dashboard.
 
 ## 4. Stack
 
@@ -45,25 +45,33 @@ Removed on purpose: C# (no project shows it), NumPy / Pandas / GeoPandas (data s
 
 ## 5. Main Projects (Prints, in this order)
 
-### OSKM ITB 2026 Website
+### OSKM ITB 2026 Dashboard
 - Role: Frontend Developer
-- Summary: Frontend developer for the official website of OSKM ITB 2026, ITB's annual new-student orientation.
+- Summary: Frontend developer for the internal dashboard of OSKM ITB 2026, ITB's annual new-student orientation, used by the committee and mentors.
+- Note: the owner's work is the internal dashboard (repo `frontend-dashboard-oskm`), not the public site.
 - Tech: Next.js, TypeScript, Tailwind CSS, shadcn/ui
 - Links: none (organization repo)
-- Print: `/prints/oskm.png` (owner provides a plain screenshot)
+- Reel: `/prints/oskm.jpg`, five dashboard pages from Valley stacked with a 14 px dark gap (login, event management, assignments, materials, assignment list); pages with student names left out. Dashboard pages are one screen tall, so there is no single long page to capture.
+
+### OSKM Open House Unit
+- Role: Frontend Developer
+- Summary: Open house website where new ITB students found student clubs, the stage rundown and an interactive venue map. On the frontend team I built the club (UKM) directory: the category pages and the club cards that lead to each club's page. (From the owner's Valley write-up.)
+- Tech: Next.js, TypeScript, Tailwind CSS
+- Links: none (organization repo `KAT-ITB-2026/frontend-ohu`)
+- Reel: `/prints/ohu.jpg`, one continuous full-page capture of the Lembaga page (UKM, BSO, HMPS, footer), taken from the running site
 
 ### RONDA
 - Summary: An Android app that catches scam APKs the moment they're installed and alerts a trusted guardian, who can uninstall or whitelist them remotely. Top 30, HackNusa 2026.
 - Role: not shown (owner's choice).
 - Tech: Kotlin, Jetpack Compose, Firebase
 - Links: GitHub https://github.com/angseleong/RONDA
-- Print: `/prints/ronda.png`
+- Reel: `/prints/ronda.jpg`, the HackNusa pitch deck slides stacked (slide 8, the YouTube player, left out)
 
 ### lafaz
 - Summary: A web app for learning to read the Qur'an by voice. Speech recognition (Whisper) runs entirely in the browser, so recordings never leave the device. Built with a friend, in development.
 - Tech: Next.js, TypeScript, Transformers.js
 - Links: GitHub https://github.com/adnankurniawann/lafaz
-- Print: `/prints/lafaz.png`
+- Reel: `/prints/lafaz.jpg`, Pelita + wordmark, then six phone screens three per row
 
 ## 6. More Projects
 
@@ -105,7 +113,7 @@ One section, two groups: **Competitions** (Vortex, HackNusa) and **Certification
 | Organization | Role | Period | One line |
 |---|---|---|---|
 | Inkubator IT | Media Intelligence Associate | Aug 2026 – Present | Writes copy for Inkubator IT's Instagram content. |
-| OSKM ITB 2026 | Frontend Developer | Jul 2026 – Present | Builds the frontend of the orientation website. |
+| OSKM ITB 2026 | Frontend Developer | Jul 2026 – Present | Builds the frontend of the orientation dashboard and the Open House Unit site. |
 | GDGoC ITB | AI Explorer | Jun 2026 – Present | Hands-on AI learning track. |
 | Aku Masuk ITB 2026 | Event Organizer | Dec 2025 – Feb 2026 | Managed the execution and alignment of MoUs with partners. |
 | STEI-K ITB 2025 | Internal Relation Staff | Aug 2025 – Jun 2026 | Handled internal public relations for the cohort. |
@@ -125,6 +133,5 @@ High school is not listed (owner's choice).
 - Email, LinkedIn, GitHub, Download CV.
 
 ## 12. Still Needed From the Owner
-- Screenshots: `oskm.png`, `ronda.png`, `lafaz.png`.
 - Four photos for the Bust (ARCHITECTURE.md §5).
 - The two **⚠ confirm** items above.
